@@ -1,224 +1,253 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="JOEABC.COM - 华人学英语，从这里开始。视频学习，实用链接，每日提升！">
-  <title>JOEABC.COM - 华人学英语视频导航</title>
+  <title>18Hub.vip - 成人导航 | 最全的成人网站推荐与资源导航</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="18Hub.vip成人导航，为18岁以上用户提供全面的成人网站入口。精选国内外主流、日系、直播、社区等优质成人资源，安全、快速、永久免费。">
+  <meta name="keywords" content="成人导航,成人视频,成人视频导航,成人网站,成人资源,18hub,色情网站,成人视频推荐">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Open Graph 标签 -->
+  <meta property="og:title" content="18Hub.vip - 成人导航 | 最全的成人网站推荐与资源导航">
+  <meta property="og:description" content="18Hub.vip成人导航，为18岁以上用户精选最全的成人资源站点，安全快速入口。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://18hub.vip/">
+  <meta property="og:image" content="https://18hub.vip/logo.png">
+  <!-- 结构化数据示例 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "18Hub.vip 成人导航",
+    "url": "https://18hub.vip/",
+    "description": "18Hub.vip成人导航，为18岁以上用户提供热门、优质的成人网站导航入口。"
+  }
+  </script>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #f6f8fb;
-      color: #333;
-    }
-
-    header {
-      background-color: #0078d4;
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    nav {
-      background-color: #f0f0f0;
-      padding: 0.5rem 1rem;
-      text-align: center;
-      font-size: 0.95rem;
-    }
-
-    nav a {
-      margin: 0 0.8rem;
-      color: #0078d4;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: auto;
-      padding: 2rem;
-    }
-
-    .section {
-      margin-bottom: 2.5rem;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      color: #0078d4;
-      border-left: 5px solid #0078d4;
-      padding-left: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    ul {
-      padding-left: 1.2rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    a {
-      color: #0078d4;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      background-color: #eee;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      margin-top: 3rem;
-    }
-
-    .more-link {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    /* 回到顶部按钮样式 */
-    #backToTop {
-      display: none;
-      position: fixed;
-      bottom: 40px;
-      right: 30px;
-      z-index: 100;
-      font-size: 1.2rem;
-      background-color: #0078d4;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      transition: opacity 0.3s;
-    }
-
-    #backToTop:hover {
-      background-color: #005fa3;
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #000; color: #ffd700; overflow: hidden; }
+    header { background: linear-gradient(to right, #000, #1c1c1c); padding: 1rem 1rem 1rem 3.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.10);}
+    .home-link { position: absolute; left: 1rem; top: 1.2rem; color: #ffd700; background: #222; padding: 0.35rem 0.9rem; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1rem; border: 1px solid #ffd700; transition: 0.2s; z-index: 10; box-shadow: 0 1px 4px rgba(0,0,0,0.10);}
+    .home-link:hover { background: #ffd700; color: #000;}
+    .lang-switch { position: absolute; right: 1rem; top: 1.2rem; z-index: 10; }
+    .lang-btn { background:#222; color:#ffd700; border:1px solid #ffd700; border-radius:6px; padding:0.27rem 0.9rem; margin-left:4px; cursor:pointer; font-weight:bold; }
+    .lang-btn.active, .lang-btn:hover { background:#ffd700; color:#000; }
+    .logo { max-width: 120px; margin: 10px auto 0 auto; display: block; }
+    main { max-width:1000px; margin:0 auto; }
+    section { margin: 2.5rem 2rem 1.5rem 2rem; }
+    h1 { font-size: 2.1rem; margin-bottom: 0.6rem; }
+    h2 { font-size:1.25rem; color: #fff; margin:1.8rem 0 0.6rem 0;}
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.2rem;}
+    .link { background: #1a1a1a; border: 1px solid #ffd700; border-radius: 10px; text-align: center; padding: 1.2rem 0.5rem; color: #ffd700; text-decoration: none; font-weight: bold; font-size: 1.08rem; transition: 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.13); display: block; word-break: break-word; min-height: 44px;}
+    .link:hover {background: #ffd700; color: #000; box-shadow: 0 2px 16px rgba(255,215,0,0.18); transform: translateY(-3px) scale(1.03); border-color: #fff;}
+    footer { padding: 1rem; text-align: center; font-size: 0.95rem; background: #111; color: #ccc; letter-spacing: 0.07em; border-top: 1px solid #222; box-shadow: 0 -2px 8px rgba(0,0,0,0.15); margin-top: 2rem;}
+    #ageModal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.96); color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; animation: fadein 0.5s; padding: 2rem; overflow-y: auto; }
+    @keyframes fadein { from { opacity: 0; } to   { opacity: 1; }}
+    #ageModal h2 { font-size: 2rem; margin-bottom: 1.3rem; color: #ffd700; text-shadow: 0 2px 5px #000; letter-spacing: 0.1em; text-align: center; }
+    #ageModal button { background: #ffd700; color: #000; border: none; padding: 0.6rem 1.4rem; font-size: 1rem; border-radius: 8px; margin: 0.5rem 0.7rem; cursor: pointer; transition: 0.3s; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.12);}
+    #ageModal button:hover { background: #fff; color: #000;}
+    .hidden { display: none !important; }
+    .modal-lang-switch { margin-bottom: 1rem; text-align: center; }
+    .modal-lang-btn { background:#222; color:#ffd700; border:1px solid #ffd700; border-radius:6px; padding:0.27rem 0.9rem; margin:0 6px; cursor:pointer; font-weight:bold; }
+    .modal-lang-btn.active, .modal-lang-btn:hover { background:#ffd700; color:#000; }
+    @media (max-width: 600px) {
+      section { margin: 1.2rem 0.6rem 1.2rem 0.6rem;}
+      .grid { gap: 0.7rem;}
+      .link { padding: 0.8rem 0.2rem; font-size: 0.98rem;}
+      header { padding: 1rem 0.5rem 1rem 2.5rem;}
+      .home-link { left: 0.5rem; top: 1rem; font-size: 0.98rem; padding: 0.26rem 0.7rem;}
+      .lang-switch { right: 0.5rem; top: 1rem;}
     }
   </style>
-
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
-
 <body>
-
-  <header>
-    <h1>JoeABC.com - 华人学英语视频导航</h1>
-    <p>轻松学英语，从每天一部视频开始</p>
-  </header>
-
-  <nav>
-    <a href="https://tapbi.com" target="_blank">TapBi.com</a>
-    <a href="https://jozl.com" target="_blank">JOZL.COM</a>
-    <a href="https://joeabc.com/About" target="_blank">关于Joe</a>
-  </nav>
-
-  <div class="container">
-    <section class="section">
-      <h2>👋 嗨，我是 Joe！</h2>
-      <p>欢迎来到 <strong>JoeABC.com</strong> —— 一个为华人设计的英语学习网站。</p>
-      <p>我知道很多朋友在学英语时感到枯燥、没方向。我整理了适合中文母语者的英文学习资源，包括每日短视频、实用网站导航、词汇练习、AI 助教对话等，希望让你每天轻松学一点。</p>
-    </section>
-
-    <section class="section">
-      <h2><a href="https://joeabc.com/a">🎬 英语学习视频推荐，点击显示更多</a></h2>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/1frSB7BW7Kg" title="英文口语练习" allowfullscreen></iframe>
-      </div>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/1s4aME59LiY" title="英语听力练习" allowfullscreen></iframe>
-      </div>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/ZRTv2BHdVGM" title="每日一句英文" allowfullscreen></iframe>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2><a href="https://joeabc.com/b">🎬 每天一首英文歌，点击显示更多</a></h2>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/thXeHyYU5DE" title="每天一首英文歌" allowfullscreen></iframe>
-      </div>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/W_EwSPswhkQ" title="每天一首英文歌" allowfullscreen></iframe>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>📚 实用英语学习工具推荐</h2>
-      <ul>
-        <li><a href="https://dictionary.cambridge.org/" target="_blank">剑桥在线词典（Cambridge）</a></li>
-        <li><a href="https://www.englishclub.com/pronunciation/" target="_blank">English Club - 发音练习</a></li>
-        <li><a href="https://www.ted.com/topics/learning+english" target="_blank">TED 英语演讲练习</a></li>
-        <li><a href="https://youglish.com/" target="_blank">YouGlish - 例句发音搜索</a></li>
-        <li><a href="https://chat.openai.com/" target="_blank">AI 英语对话练习（ChatGPT）</a></li>
-      </ul>
-    </section>
+  <!-- 年龄验证弹窗 -->
+  <div id="ageModal">
+    <div class="modal-lang-switch">
+      <button class="modal-lang-btn active" id="modal-btn-zh" onclick="modalSwitchLang('zh')">中文</button>
+      <button class="modal-lang-btn" id="modal-btn-en" onclick="modalSwitchLang('en')">English</button>
+    </div>
+    <h2 id="age-title-zh">您是否年满18岁，并同意以下免责声明？</h2>
+    <h2 id="age-title-en" class="hidden">Are you over 18 years old and do you agree to the following disclaimer?</h2>
+    <div id="age-desc-zh" style="max-width: 720px; background: #111; color: #ccc; padding: 1.2rem 1.5rem; border-radius: 10px; text-align: left; font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.3); overflow-y: auto; max-height: 55vh;">
+      <p><strong>免责声明：</strong> 本站 18Hub.vip 为成人内容导航平台，仅供年满18岁及以上的成年人使用，所收录内容来自互联网公开信息。本站不存储、不制作、不传播任何内容，对外部链接内容的合法性、安全性或准确性不承担任何责任。用户需遵守所在国家/地区的法律，自行承担浏览风险。未成年人请立即离开。如发现侵权内容请联系：info@jozl.com。</p>
+    </div>
+    <div id="age-desc-en" class="hidden" style="max-width: 720px; background: #111; color: #ccc; padding: 1.2rem 1.5rem; border-radius: 10px; text-align: left; font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.3); overflow-y: auto; max-height: 55vh;">
+      <p><strong>Disclaimer:</strong> This site, 18Hub.vip, is an adult content navigation platform, only for use by adults aged 18 and above. All listed content comes from publicly available information on the Internet. This site does not store, produce, or distribute any content and is not responsible for the legality, safety, or accuracy of external link content. Users must comply with the laws of their country/region and are responsible for their own browsing risks. Minors should leave immediately. If you find any infringing content, please contact: info@jozl.com.</p>
+    </div>
+    <button onclick="enterSite()" id="btn-yes">是，我已满18岁并同意</button>
+    <button onclick="location.href='https://www.google.com'" id="btn-no">否，离开</button>
   </div>
-
-  <!-- 回到顶部按钮 -->
-  <button id="backToTop" title="回到顶部">↑</button>
-
-  <footer>
-    © 2025 JOEABC.COM | 联系邮箱：<a href="mailto:323748@gmail.com">323748@gmail.com</a><br>
-    <a class="more-link" href="https://tapbi.com" target="_blank">了解 Joe 的更多 →</a>
+  <header>
+    <a href="https://www.tapbi.com/" class="home-link" id="home-link">返回首页</a>
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btn-zh" onclick="switchLang('zh')">中文</button>
+      <button class="lang-btn" id="btn-en" onclick="switchLang('en')">English</button>
+    </div>
+    <img src="logo.png" alt="18Hub.VIP Logo" class="logo" />
+    <h1 id="title-zh">18Hub.vip 成人导航</h1>
+    <h1 id="title-en" class="hidden">18Hub.vip Adult Directory</h1>
+    <p id="desc-zh">
+      18Hub.vip成人导航，专为18岁及以上用户打造，汇集全球优质成人网站，安全、快速、永久免费。<br>
+      这里你可以方便地访问各类国内外主流成人视频、日系资源站、真人直播、二次元社区等优质内容。请自觉遵守当地法律法规，未成年人请勿访问。
+    </p>
+    <p id="desc-en" class="hidden">
+      18Hub.vip Adult Directory, designed for users aged 18 and above, gathers the best global adult websites. Safe, fast, and always free.<br>
+      Easily access mainstream Western, Japanese AV, live cams, and 2D communities. Please comply with your local laws and leave if you are a minor.
+    </p>
+  </header>
+  <main>
+    <!-- 中文内容 -->
+    <section id="mainGrid-zh">
+      <h2>🔥 欧美主流成人网站</h2>
+      <div class="grid">
+        <a href="https://xvideos.com/" class="link" target="_blank" rel="noopener nofollow">Xvideos</a>
+        <a href="https://www.pornhub.com/" class="link" target="_blank" rel="noopener nofollow">Pornhub</a>
+        <a href="https://redtube.com/" class="link" target="_blank" rel="noopener nofollow">Redtube</a>
+        <a href="https://youporn.com/" class="link" target="_blank" rel="noopener nofollow">YouPorn</a>
+        <a href="https://xhamster.com/" class="link" target="_blank" rel="noopener nofollow">Xhamster</a>
+        <a href="https://www.eporner.com" class="link" target="_blank" rel="noopener nofollow">Eporner</a>
+        <a href="https://www.spankbang.com" class="link" target="_blank" rel="noopener nofollow">SpankBang</a>
+        <a href="https://www.manyvids.com" class="link" target="_blank" rel="noopener nofollow">ManyVids</a>
+      </div>
+      <h2>🌸 日系成人资源站</h2>
+      <div class="grid">
+        <a href="https://4hu.com/" class="link" target="_blank" rel="noopener nofollow">4hu</a>
+        <a href="https://javdb.com/" class="link" target="_blank" rel="noopener nofollow">JavDB</a>
+        <a href="https://missav.com/" class="link" target="_blank" rel="noopener nofollow">MissAV</a>
+        <a href="https://jable.tv/" class="link" target="_blank" rel="noopener nofollow">Jable</a>
+        <a href="https://www.javlibrary.com/cn/" class="link" target="_blank" rel="noopener nofollow">JAV Library</a>
+        <a href="https://adult.contents.fc2.com" class="link" target="_blank" rel="noopener nofollow">FC2 成人</a>
+      </div>
+      <h2>🎥 真人直播互动</h2>
+      <div class="grid">
+        <a href="https://www.myfreecams.com/" class="link" target="_blank" rel="noopener nofollow">MyFreeCams</a>
+        <a href="https://chaturbate.com" class="link" target="_blank" rel="noopener nofollow">Chaturbate</a>
+        <a href="https://www.stripchat.com" class="link" target="_blank" rel="noopener nofollow">Stripchat</a>
+      </div>
+      <h2>🎨 成人社区 & 二次元</h2>
+      <div class="grid">
+        <a href="https://hanime.tv" class="link" target="_blank" rel="noopener nofollow">HAnime</a>
+        <a href="https://rule34.xxx" class="link" target="_blank" rel="noopener nofollow">Rule34</a>
+        <a href="https://www.reddit.com/r/nsfw/" class="link" target="_blank" rel="noopener nofollow">Reddit NSFW</a>
+      </div>
+      <h2>🧭 其他导航 & 本地精选</h2>
+      <div class="grid">
+        <a href="https://www.theporndude.com" class="link" target="_blank" rel="noopener nofollow">ThePornDude</a>
+        <a href="https://www.168papapa.com/" class="link" target="_blank" rel="noopener nofollow">纽约啪啪网</a>
+        <a href="https://usamitao.com/" class="link" target="_blank" rel="noopener nofollow">美国蜜桃网</a>
+      </div>
+    </section>
+    <!-- 英文内容 -->
+    <section id="mainGrid-en" class="hidden">
+      <h2>🔥 Western Mainstream</h2>
+      <div class="grid">
+        <a href="https://xvideos.com/" class="link" target="_blank" rel="noopener nofollow">Xvideos</a>
+        <a href="https://www.pornhub.com/" class="link" target="_blank" rel="noopener nofollow">Pornhub</a>
+        <a href="https://redtube.com/" class="link" target="_blank" rel="noopener nofollow">Redtube</a>
+        <a href="https://youporn.com/" class="link" target="_blank" rel="noopener nofollow">YouPorn</a>
+        <a href="https://xhamster.com/" class="link" target="_blank" rel="noopener nofollow">Xhamster</a>
+        <a href="https://www.eporner.com" class="link" target="_blank" rel="noopener nofollow">Eporner</a>
+        <a href="https://www.spankbang.com" class="link" target="_blank" rel="noopener nofollow">SpankBang</a>
+        <a href="https://www.manyvids.com" class="link" target="_blank" rel="noopener nofollow">ManyVids</a>
+      </div>
+      <h2>🌸 Japanese Sites</h2>
+      <div class="grid">
+        <a href="https://4hu.com/" class="link" target="_blank" rel="noopener nofollow">4hu</a>
+        <a href="https://javdb.com/" class="link" target="_blank" rel="noopener nofollow">JavDB</a>
+        <a href="https://missav.com/" class="link" target="_blank" rel="noopener nofollow">MissAV</a>
+        <a href="https://jable.tv/" class="link" target="_blank" rel="noopener nofollow">Jable</a>
+        <a href="https://www.javlibrary.com/cn/" class="link" target="_blank" rel="noopener nofollow">JAV Library</a>
+        <a href="https://adult.contents.fc2.com" class="link" target="_blank" rel="noopener nofollow">FC2 Adult</a>
+      </div>
+      <h2>🎥 Live Cams</h2>
+      <div class="grid">
+        <a href="https://www.myfreecams.com/" class="link" target="_blank" rel="noopener nofollow">MyFreeCams</a>
+        <a href="https://chaturbate.com" class="link" target="_blank" rel="noopener nofollow">Chaturbate</a>
+        <a href="https://www.stripchat.com" class="link" target="_blank" rel="noopener nofollow">Stripchat</a>
+      </div>
+      <h2>🎨 Community & 2D</h2>
+      <div class="grid">
+        <a href="https://hanime.tv" class="link" target="_blank" rel="noopener nofollow">HAnime</a>
+        <a href="https://rule34.xxx" class="link" target="_blank" rel="noopener nofollow">Rule34</a>
+        <a href="https://www.reddit.com/r/nsfw/" class="link" target="_blank" rel="noopener nofollow">Reddit NSFW</a>
+      </div>
+      <h2>🧭 Navigation & Local</h2>
+      <div class="grid">
+        <a href="https://www.theporndude.com" class="link" target="_blank" rel="noopener nofollow">ThePornDude</a>
+        <a href="https://www.168papapa.com/" class="link" target="_blank" rel="noopener nofollow">New York Papapa</a>
+        <a href="https://usamitao.com/" class="link" target="_blank" rel="noopener nofollow">USA Peach Net</a>
+      </div>
+    </section>
+  </main>
+  <footer id="footer">
+    <span id="footer-zh">
+      本站导航内容仅供18岁以上用户访问，所有链接均来自互联网公开信息，本站不储存任何资源。请遵守当地法律法规，访问风险自负。<br>
+      © 2025 18Hub.vip | 联系邮箱: info@jozl.com
+    </span>
+    <span id="footer-en" class="hidden">
+      This navigation site is only for users over 18 years old. All links are from public information on the Internet. We do not host any content.<br>
+      © 2025 18Hub.vip | Contact: info@jozl.com
+    </span>
   </footer>
-
-  <!-- JavaScript: 回到顶部逻辑 -->
   <script>
-    const backToTopButton = document.getElementById("backToTop");
-    window.onscroll = function () {
-      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        backToTopButton.style.display = "block";
+    // 弹窗内语言切换
+    function modalSwitchLang(lang) {
+      document.getElementById('age-title-zh').classList.toggle('hidden', lang !== 'zh');
+      document.getElementById('age-title-en').classList.toggle('hidden', lang !== 'en');
+      document.getElementById('age-desc-zh').classList.toggle('hidden', lang !== 'zh');
+      document.getElementById('age-desc-en').classList.toggle('hidden', lang !== 'en');
+      document.getElementById('modal-btn-zh').classList.toggle('active', lang === 'zh');
+      document.getElementById('modal-btn-en').classList.toggle('active', lang === 'en');
+      // 同步切换按钮文字
+      if(lang === 'zh') {
+        document.getElementById('btn-yes').textContent = '是，我已满18岁并同意';
+        document.getElementById('btn-no').textContent = '否，离开';
       } else {
-        backToTopButton.style.display = "none";
+        document.getElementById('btn-yes').textContent = 'Yes, I am over 18 and agree';
+        document.getElementById('btn-no').textContent = 'No, Leave';
       }
-    };
-
-    backToTopButton.onclick = function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+    }
+    // 显示页面（通过年龄验证）
+    function enterSite() {
+      document.getElementById('ageModal').style.display = 'none';
+      document.getElementById('mainGrid-zh').classList.remove('hidden');
+      document.getElementById('footer').style.display = 'block';
+      document.body.style.overflow = 'auto';
+    }
+    // 语言切换
+    function switchLang(lang) {
+      document.getElementById('title-zh').classList.toggle('hidden', lang !== 'zh');
+      document.getElementById('title-en').classList.toggle('hidden', lang !== 'en');
+      document.getElementById('desc-zh').classList.toggle('hidden', lang !== 'zh');
+      document.getElementById('desc-en').classList.toggle('hidden', lang !== 'en');
+      document.getElementById('mainGrid-zh').classList.toggle('hidden', lang !== 'zh');
+      document.getElementById('mainGrid-en').classList.toggle('hidden', lang !== 'en');
+      if(lang === 'zh') {
+        document.getElementById('footer-zh').classList.remove('hidden');
+        document.getElementById('footer-en').classList.add('hidden');
+        document.getElementById('home-link').textContent = '返回首页';
+        document.getElementById('age-title-zh').textContent = '您是否年满18岁，并同意以下免责声明？';
+        document.getElementById('btn-yes').textContent = '是，我已满18岁并同意';
+        document.getElementById('btn-no').textContent = '否，离开';
+        document.getElementById('btn-zh').classList.add('active');
+        document.getElementById('btn-en').classList.remove('active');
+        // 弹窗也切换
+        modalSwitchLang('zh');
+      } else {
+        document.getElementById('footer-zh').classList.add('hidden');
+        document.getElementById('footer-en').classList.remove('hidden');
+        document.getElementById('home-link').textContent = 'Back Home';
+        document.getElementById('age-title-en').textContent = 'Are you over 18 years old and do you agree to the following disclaimer?';
+        document.getElementById('btn-yes').textContent = 'Yes, I am over 18 and agree';
+        document.getElementById('btn-no').textContent = 'No, Leave';
+        document.getElementById('btn-en').classList.add('active');
+        document.getElementById('btn-zh').classList.remove('active');
+        // 弹窗也切换
+        modalSwitchLang('en');
+      }
+    }
+    // 默认弹窗中文
+    modalSwitchLang('zh');
   </script>
-
 </body>
 </html>
-
-
