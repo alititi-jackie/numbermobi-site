@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://usa168hot.com/sitemap.xml
+Host: usa168hot.com
