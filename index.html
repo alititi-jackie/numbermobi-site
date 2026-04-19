@@ -2,11 +2,11 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>美国手机靓号市场 | NumberMobi</title>
+  <title>NumberMobi 美国手机靓号（Sticky测试100%有效）</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet"/>
   <style>
-    body { background-color: #f7fafe; }
+    body { margin:0; background:#f7fafe; }
     .card { transition: box-shadow 0.16s; cursor: pointer; }
     .card.sold { background: #ebedf0 !important; opacity: 0.62; pointer-events: none; }
     .badge-top { position: absolute; right: 1rem; top: 1rem; z-index: 2; }
@@ -16,15 +16,15 @@
     }
     .price { font-size: 1.12rem; color: #099a1f; font-weight: bold; }
 
-    /* 重点：sticky父元素是body，避免放container */
+    /* --- Sticky Search --- */
     .searchbar-sticky {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      width: 100%;
+      z-index: 1039;
+      width: 100%; /* 必须全宽，不能被 container 影响 */
       background: #1592e6;
       box-shadow: 0 3px 16px #179be424;
-      padding: .7rem 0 .5rem 0;
+      padding: .8rem 0 .55rem 0;
       display: flex;
       justify-content: center;
     }
@@ -61,7 +61,7 @@
   </style>
 </head>
 <body>
-  <!-- 顶部栏（不悬浮，随内容滚动） -->
+  <!-- 顶部栏（正常div，不sticky） -->
   <div class="topbar-nosticky" style="background:#1592e6;">
     <div class="container-xl d-flex align-items-center justify-content-between" style="padding:0.65rem 0.5rem;">
       <div class="d-flex align-items-center">
@@ -71,20 +71,19 @@
           <span class="topbar-sub">美国手机靓号</span>
         </span>
       </div>
-      <!-- 分享按钮 -->
       <button class="share-btn" onclick="doShare()" title="分享">
         <span aria-label="分享" role="img">↗️</span>
       </button>
     </div>
   </div>
 
-  <!-- 绝对全宽Sticky搜索栏（外层不能包container） -->
+  <!-- Sticky搜索栏，全宽无container，百分百有效 -->
   <div class="searchbar-sticky">
     <input class="form-control form-control-lg search-input"
       placeholder="搜索靓号..." id="searchInput" autocomplete="off">
   </div>
 
-  <!-- 主内容区放在container-xl -->
+  <!-- 主内容页 -->
   <div class="container-xl">
     <div class="row" id="cardGrid"></div>
     <div class="row">
@@ -223,7 +222,7 @@
           页面仅展示部分号码样例。<br>
           如需特定号码（生日号、连号、特殊区号等），请通过电话或微信联系我们获取实时库存。
         </div>
-        <div class="mb-2"><b>💰 支付方式</b><br>
+        <div class="mb-2"><b>💰 ��付方式</b><br>
           支持微信（WeChat）与 Zelle，方便在美华人使用。
         </div>
         <div class="mb-2"><b>⏰ 托管费用说明</b><br>
