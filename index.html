@@ -4,53 +4,92 @@
   <meta charset="UTF-8">
   <title>美国手机靓号市场 | NumberMobi</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <!-- Tabler UI 核心CDN -->
+  <!-- Tabler UI -->
   <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet"/>
   <style>
     body { background-color: #f7fafe; }
     .card { transition: box-shadow 0.16s; cursor: pointer; }
     .card.sold { background: #ebedf0 !important; opacity: 0.62; pointer-events: none; }
-    .badge-top {
-      position: absolute; right: 1rem; top: 1rem; z-index: 2;
-    }
+    .badge-top { position: absolute; right: 1rem; top: 1rem; z-index: 2; }
     .number {
       color: #2065d1; font-size: 1.27rem; font-weight: bold;
       letter-spacing: 2px; margin-bottom: 0.3rem; line-height: 1.3;
     }
     .price { font-size: 1.12rem; color: #099a1f; font-weight: bold; }
     .search-input { width: 100%; max-width: 380px; margin: 0 auto 1.2rem; }
+    /* 顶部栏始终悬浮 */
+    .topbar-custom {
+      position: sticky; top: 0; left: 0; right: 0;
+      z-index: 1040;
+      background: #1592e6;
+      box-shadow: 0 2px 10px #1680ea28;
+      padding: 0;
+    }
+    .topbar-container {
+      padding:0.6rem 0.5rem 0.2rem 0.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo-img {
+      height: 36px; width: auto; display: inline-block;
+      background: #fff; border-radius:7px; border:1px solid #e6e9f4;
+      margin-right: 11px; box-shadow:0 1px 5px #104cba23;
+      padding: 3px 4px 3px 4px;
+    }
+    .topbar-title {
+      color: #fff;
+      font-size:1.22rem;font-weight:700;letter-spacing:1px;vertical-align:middle;
+      text-shadow:0 1px 1px #185dc16c;
+    }
+    .topbar-sub {
+      font-size: 1.02rem; font-weight: 400; margin-left: 9px;
+      color: #e3eaff; opacity:.92;
+      letter-spacing:0;
+    }
+    .share-btn {
+      background:rgba(255,255,255,0.18);
+      border:none; border-radius:50%; width:40px; height:40px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.56rem; color:#fff;
+      transition:background .18s;
+      box-shadow:0 1px 6px #1861a62b;
+    }
+    .share-btn:active { background:rgba(255,255,255,0.35);}
     @media (max-width: 575px) {
       .number { font-size: 1.1rem;}
       .price { font-size: 1rem;}
+      .logo-img { height: 29px; padding:2px 2px}
+      .topbar-title { font-size:1.025rem;}
+      .topbar-container { padding-left:5px !important; padding-right:7px !important; }
+      .container-xl { padding-left: 6px; padding-right: 6px;}
     }
   </style>
 </head>
 <body>
-  <!-- 顶部导航 -->
-   <!-- 顶部栏，自定义蓝色背景 -->
-<div class="topbar-custom" style="position:sticky;top:0;left:0;right:0;z-index:1040;background:#1592e6;padding:0;">
-  <div class="container-xl d-flex align-items-center justify-content-between" style="padding:0.6rem 0.5rem;">
-    <div class="d-flex align-items-center">
-      <img src="/logo.png" alt="OpenAA" style="height:38px;width:auto;display:inline-block;margin-right:10px;">
-      <span class="fw-bold text-white" style="font-size:1.32rem;letter-spacing:1px;">
-        NumberMobi <span style="font-size:1.02rem;font-weight:normal;">美国手机靓号</span>
-      </span>
+  <!-- 顶部栏 -->
+  <div class="topbar-custom">
+    <div class="container-xl topbar-container">
+      <div class="d-flex align-items-center">
+        <img src="https://openaa.com/logo.png" alt="OpenAA" class="logo-img" loading="lazy">
+        <span class="topbar-title">
+          NumberMobi
+          <span class="topbar-sub">美国手机靓号</span>
+        </span>
+      </div>
+      <!-- 分享按钮 -->
+      <button class="share-btn" onclick="doShare()" title="分享">
+        <span aria-label="分享" role="img">↗️</span>
+      </button>
     </div>
-    <!-- 分享按钮 -->
-    <button class="share-btn" onclick="doShare()" title="分享" 
-      style="background:rgba(255,255,255,0.13);border:none;border-radius:50%;width:42px;height:42px;
-        display:flex;align-items:center;justify-content:center;cursor:pointer;">
-      <span style="font-size:1.65rem;line-height:1;display:block;">↗️</span>
-    </button>
+    <!-- 搜索框 -->
+    <div class="container-xl pb-2">
+      <input class="form-control form-control-lg search-input"
+        style="background:#f2f5fa;border-radius:16px;border:none;font-size:1.02rem"
+        placeholder="搜索靓号..." id="searchInput" autocomplete="off">
+    </div>
   </div>
-  <!-- 搜索框 -->
-  <div class="container-xl pb-2">
-    <input class="form-control form-control-lg search-input"
-      style="background:#f2f5fa;border-radius:16px;border:none;font-size:1.02rem"
-      placeholder="搜索靓号..." id="searchInput" autocomplete="off">
-  </div>
-</div>
   
+  <!-- 主内容区 -->
+  <div class="container-xl">
     <!-- 号码卡片网格 -->
     <div class="row" id="cardGrid"></div>
     <div class="row">
@@ -78,6 +117,26 @@
   <!-- Tabler JS（含弹窗等） -->
   <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
   <script>
+    // 分享按钮逻辑，优先用系统原生，否则复制网址
+    function doShare() {
+      const url = window.location.href;
+      const text = 'NumberMobi 美国手机靓号，高性价比号码热卖，网址：';
+      if (navigator.share) {
+        navigator.share({
+          title: 'NumberMobi 美国手机靓号',
+          text: text,
+          url: url
+        }).catch(()=>{});
+      } else {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url);
+          alert('已复制网址，可以粘贴到微信、朋友圈或其他聊天工具分享：\n' + url);
+        } else {
+          prompt('请复制网址进行分享：', url);
+        }
+      }
+    }
+
     // 号码渲染逻辑
     let allNumbers = [];
     function renderCards(numbers) {
@@ -119,27 +178,27 @@
     }
     
     // 联系方式弹窗
-function showContact() {
-  const modal = new tabler.Modal(document.getElementById('contactModal'));
-  document.getElementById('contactModal').querySelector('.modal-title').innerHTML = "联系方式";
-  document.getElementById('contactModal').querySelector('.modal-body').innerHTML = `
-    <div class="mb-3">
-      <b>电话：</b>
-      <span class="text-primary ms-1" style="font-size:1.14em;">+1 (917) 842-6666</span>
-      <a href="tel:+19178426666" class="btn btn-primary btn-sm ms-2">拨打</a>
-    </div>
-    <div class="mb-2">
-      <b>微信：</b>
-      <span id="wechatId">hola24</span>
-      <button class="btn btn-success btn-sm ms-2" onclick="copyWeChat()">复制微信号</button>
-      <div class="small text-muted mt-1">复制后请到微信粘贴添加好友</div>
-    </div>
-    <div class="mt-4 text-muted small">
-      支持微信支付、Zelle。⏱ 号码库存变化较快，请联系确认该号码是否仍在售。
-    </div>
-  `;
-  modal.show();
-}
+    function showContact() {
+      const modal = new tabler.Modal(document.getElementById('contactModal'));
+      document.getElementById('contactModal').querySelector('.modal-title').innerHTML = "联系方式";
+      document.getElementById('contactModal').querySelector('.modal-body').innerHTML = `
+        <div class="mb-3">
+          <b>电话：</b>
+          <span class="text-primary ms-1" style="font-size:1.14em;">+1 (917) 842-6666</span>
+          <a href="tel:+19178426666" class="btn btn-primary btn-sm ms-2">拨打</a>
+        </div>
+        <div class="mb-2">
+          <b>微信：</b>
+          <span id="wechatId">hola24</span>
+          <button class="btn btn-success btn-sm ms-2" onclick="copyWeChat()">复制微信号</button>
+          <div class="small text-muted mt-1">复制后请到微信粘贴添加好友</div>
+        </div>
+        <div class="mt-4 text-muted small">
+          支持微信支付、Zelle。⏱ 号码库存变化较快，请联系确认该号码是否仍在售。
+        </div>
+      `;
+      modal.show();
+    }
 
     // 复制微信
     function copyWeChat() {
@@ -169,34 +228,35 @@ function showContact() {
       });
     }
   </script>
+
   <!-- =================== 温馨提醒 & 说明区块  ===================== -->
-<div class="container-xl">
-  <div class="card mt-4 mb-2 shadow-none border-0" style="background:#fffbe6;">
-    <div class="card-body small py-3">
-      <div class="mb-2"><b>📢 温馨提醒</b><br>
-        页面仅展示部分号码样例。<br>
-        如需特定号码（生日号、连号、特殊区号等），请通过电话或微信联系我们获取实时库存。
-      </div>
-      <div class="mb-2"><b>💰 支付方式</b><br>
-        支持微信（WeChat）与 Zelle，方便在美华人使用。
-      </div>
-      <div class="mb-2"><b>⏰ 托管费用说明</b><br>
-        号码购买后请尽量在 20 天内转出。<br>
-        超过 20 天未转出，将按每月 $3 收取托管费用。
+  <div class="container-xl">
+    <div class="card mt-4 mb-2 shadow-none border-0" style="background:#fffbe6;">
+      <div class="card-body small py-3">
+        <div class="mb-2"><b>📢 温馨提醒</b><br>
+          页面仅展示部分号码样例。<br>
+          如需特定号码（生日号、连号、特殊区号等），请通过电话或微信联系我们获取实时库存。
+        </div>
+        <div class="mb-2"><b>💰 支付方式</b><br>
+          支持微信（WeChat）与 Zelle，方便在美华人使用。
+        </div>
+        <div class="mb-2"><b>⏰ 托管费用说明</b><br>
+          号码购买后请尽量在 20 天内转出。<br>
+          超过 20 天未转出，将按每月 $3 收取托管费用。
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- =================== 页脚 ===================== -->
-<footer class="mt-4 py-3 text-center small text-muted" style="background:#f7fafe;">
-  <div class="mb-1">
-    © 2026 NumberMobi.com<br>
-    Powered by <a href="https://openaa.com" target="_blank">OpenAA.com</a>
-  </div>
-  <div>
-    NumberMobi 为 OpenAA 旗下品牌，专注美国手机靓号服务。
-  </div>
-</footer>
+  <!-- =================== 页脚 ===================== -->
+  <footer class="mt-4 py-3 text-center small text-muted" style="background:#f7fafe;">
+    <div class="mb-1">
+      © 2026 NumberMobi.com<br>
+      Powered by <a href="https://openaa.com" target="_blank">OpenAA.com</a>
+    </div>
+    <div>
+      NumberMobi 为 OpenAA 旗下品牌，专注美国手机靓号服务。
+    </div>
+  </footer>
 </body>
 </html>
