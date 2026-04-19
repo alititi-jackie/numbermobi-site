@@ -15,7 +15,25 @@
       letter-spacing: 2px; margin-bottom: 0.3rem; line-height: 1.3;
     }
     .price { font-size: 1.12rem; color: #099a1f; font-weight: bold; }
-    .search-input { width: 100%; max-width: 380px; margin: 0 auto 1.2rem;}
+    .searchbar-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 1039;
+      background: #1592e6;
+      box-shadow: 0 2px 10px #1680ea22;
+      padding: .75rem 0 .5rem 0;
+      display: flex;
+      justify-content: center;
+    }
+    .search-input {
+      max-width: 380px;
+      width: 92vw;
+      margin: 0 auto;
+      background: #f2f5fa;
+      border-radius: 16px;
+      border: none;
+      font-size: 1.02rem;
+    }
     .topbar-nosticky .logo-img {
       height: 36px; width: auto; display: inline-block; background: #fff; border-radius:7px;
       border:1px solid #e6e9f4; margin-right: 11px; box-shadow:0 1px 5px #104cba23; padding: 3px 4px 3px 4px;
@@ -31,25 +49,17 @@
       box-shadow:0 1px 6px #1861a62b;
     }
     .share-btn:active { background:rgba(255,255,255,0.35);}
-    .searchbar-sticky {
-      position:sticky;
-      top:0;
-      z-index:1039;
-      background:#1592e6;
-      padding:0.85rem 0 0.5rem 0;
-      box-shadow:0 2px 10px #1680ea22;
-    }
     @media (max-width: 575px) {
       .number { font-size: 1.1rem;}
       .price { font-size: 1rem;}
       .topbar-nosticky .logo-img { height: 29px; padding:2px 2px}
       .topbar-title { font-size:1.025rem;}
-      .container-xl, .topbar-nosticky .container-xl, .searchbar-sticky .container-xl { padding-left: 8px; padding-right: 8px;}
+      .container-xl, .topbar-nosticky .container-xl { padding-left: 8px; padding-right: 8px;}
     }
   </style>
 </head>
 <body>
-  <!-- 顶部栏（非悬浮） -->
+  <!-- 顶部栏（非悬浮，随页面滚动） -->
   <div class="topbar-nosticky" style="background:#1592e6;">
     <div class="container-xl d-flex align-items-center justify-content-between" style="padding:0.65rem 0.5rem;">
       <div class="d-flex align-items-center">
@@ -65,14 +75,11 @@
       </button>
     </div>
   </div>
-
-  <!-- 搜索框悬浮，sticky -->
+  
+  <!-- 搜索框单独sticky -->
   <div class="searchbar-sticky">
-    <div class="container-xl">
-      <input class="form-control form-control-lg search-input"
-        style="background:#f2f5fa;border-radius:16px;border:none;font-size:1.02rem"
-        placeholder="搜索靓号..." id="searchInput" autocomplete="off">
-    </div>
+    <input class="form-control form-control-lg search-input"
+      placeholder="搜索靓号..." id="searchInput" autocomplete="off">
   </div>
 
   <!-- 主内容区 -->
@@ -101,7 +108,6 @@
     </div>
   </div>
 
-  <!-- Tabler JS -->
   <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
   <script>
     // 分享按钮逻辑
@@ -152,7 +158,6 @@
       }).join('');
     }
 
-    // 搜索
     function doSearch(key) {
       key = key.replace(/[^\d]/g, '');
       if (!key) {
@@ -162,7 +167,6 @@
       renderCards(allNumbers.filter(it=>it.number.includes(key)));
     }
 
-    // 联系方式弹窗
     function showContact() {
       const modal = new tabler.Modal(document.getElementById('contactModal'));
       document.getElementById('contactModal').querySelector('.modal-title').innerHTML = "联系方式";
@@ -198,7 +202,6 @@
       }
     }
 
-    // 初始化
     window.onload = function() {
       fetch('./data/numbers.json')
         .then(res=>res.json())
@@ -213,7 +216,7 @@
     }
   </script>
 
-  <!-- =================== 温馨提醒 & 说明区块  ===================== -->
+  <!-- 以下为页面底部说明和版权 -->
   <div class="container-xl">
     <div class="card mt-4 mb-2 shadow-none border-0" style="background:#fffbe6;">
       <div class="card-body small py-3">
@@ -232,7 +235,6 @@
     </div>
   </div>
 
-  <!-- =================== 页脚 ===================== -->
   <footer class="mt-4 py-3 text-center small text-muted" style="background:#f7fafe;">
     <div class="mb-1">
       © 2026 NumberMobi.com<br>
