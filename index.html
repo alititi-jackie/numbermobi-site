@@ -114,30 +114,27 @@
     }
     
     // 联系方式弹窗
-    function showContact() {
-      const modal = new tabler.Modal(document.getElementById('contactModal'));
-      document.getElementById('contactModal').querySelector('.modal-title').innerHTML = "联系方式";
-      document.getElementById('contactModal').querySelector('.modal-body').innerHTML = `
-        <div class="mb-3">
-          <b>电话：</b>
-          <a href="tel:+19178426666" class="btn btn-primary btn-sm ms-2">拨打</a>
-        </div>
-        <div class="mb-2">
-          <b>微信：</b>
-          <span id="wechatId">hola24</span>
-          <button class="btn btn-success btn-sm ms-2" onclick="copyWeChat()">复制微信号</button>
-          <div class="small text-muted mt-1">复制后请到微信粘贴添加好友</div>
-        </div>
-        <div class="my-3 text-center">
-          <img src="assets/wechat_qr.png" alt="微信二维码" style="width:160px;height:160px;border-radius:10px;">
-          <div class="small text-muted mt-1">微信扫码加好友</div>
-        </div>
-        <div class="mt-4 text-muted small">
-          支持微信支付、Zelle。为保障交易安全，号码请先联系客服确认。
-        </div>
-      `;
-      modal.show();
-    }
+function showContact() {
+  const modal = new tabler.Modal(document.getElementById('contactModal'));
+  document.getElementById('contactModal').querySelector('.modal-title').innerHTML = "联系方式";
+  document.getElementById('contactModal').querySelector('.modal-body').innerHTML = `
+    <div class="mb-3">
+      <b>电话：</b>
+      <span class="text-primary ms-1" style="font-size:1.14em;">+1 (917) 842-6666</span>
+      <a href="tel:+19178426666" class="btn btn-primary btn-sm ms-2">拨打</a>
+    </div>
+    <div class="mb-2">
+      <b>微信：</b>
+      <span id="wechatId">hola24</span>
+      <button class="btn btn-success btn-sm ms-2" onclick="copyWeChat()">复制微信号</button>
+      <div class="small text-muted mt-1">复制后请到微信粘贴添加好友</div>
+    </div>
+    <div class="mt-4 text-muted small">
+      支持微信支付、Zelle。为保障交易安全，号码请先联系客服确认。
+    </div>
+  `;
+  modal.show();
+}
 
     // 复制微信
     function copyWeChat() {
