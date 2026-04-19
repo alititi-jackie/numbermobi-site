@@ -1,42 +1,91 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>美国手机靓号｜NumberMobi</title>
-  <meta name="keywords" content="美国手机靓号,纽约手机号,三连号,四连号"/>
-  <meta name="description" content="优质美国靓号号码市场，蓝色简洁APP风格网格展示"/>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NumberMobi｜美国手机靓号网</title>
+
+  <link rel="stylesheet" href="style.css"/>
 </head>
+
 <body>
 
-  <div class="top-bar">
-    <!-- logo建议直接用你的图片，也可用文字模拟，如下： -->
-    <div style="display: flex; align-items: center;">
-      <img src="https://openaa.com/static/logo.png" class="logo-img" alt="Logo" onerror="this.style.display='none';" />
-      <span class="domain-title">openaa.com</span>
-    </div>
-    <div class="top-icons">
-      <button class="icon-btn" title="首页">🏠</button>
-      <button class="icon-btn" title="置顶">📌</button>
-    </div>
+<!-- 顶部 -->
+<header class="topbar">
+  <div class="logo">NumberMobi <span>美国手机靓号网</span></div>
+
+  <a class="back" href="https://openaa.com" target="_blank">← OpenAA</a>
+</header>
+
+<!-- 搜索 -->
+<div class="search-box">
+  <input id="searchInput" placeholder="输入号码片段搜索（如 917 / 666 / 842）"/>
+</div>
+
+<!-- 分类 -->
+<div class="filters">
+  <button onclick="filterType('all')">全部</button>
+  <button onclick="filterType('triple')">三连号</button>
+  <button onclick="filterType('quad')">四连号</button>
+  <button onclick="filterType('straight')">顺子号</button>
+  <button onclick="filterType('other')">其它</button>
+</div>
+
+<!-- 号码列表 -->
+<div id="list" class="list"></div>
+
+<!-- 弹窗 -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3>📞 购买此号码</h3>
+
+    <p id="modalNumber"></p>
+
+    <hr/>
+
+    <p>📱 电话：+1 (917) 842-6666</p>
+    <p>💬 微信：hola24</p>
+    <p>📧 邮箱：323748@gmail.com</p>
+
+    <hr/>
+
+    <p class="warn">
+      ⚠️ 请联系客服确认该号码是否仍在售
+    </p>
+
+    <p>
+      💰 支付方式：Zelle / 微信 / 支付宝
+    </p>
+
+    <button onclick="closeModal()">关闭</button>
   </div>
+</div>
 
-  <div class="search-wrapper">
-    <input class="search-input" id="searchInput" placeholder="搜索靓号…" autocomplete="off">
-    <button class="search-btn" id="searchBtn">🔍</button>
-  </div>
+<!-- 底部导航 -->
+<nav class="bottom-nav">
+  <a href="#">🏠 首页</a>
+  <a href="https://openaa.com">📊 分类</a>
+  <a href="#flow">🛒 流程</a>
+  <a href="#" onclick="openContact()">💬 联系</a>
+  <a href="#info">📋 声明</a>
+</nav>
 
-  <div class="phone-grid" id="phoneGrid"></div>
+<!-- 说明 -->
+<footer id="info" class="footer">
+  <h4>温馨提示</h4>
+  <p>本页面仅展示部分靓号库存。</p>
 
-  <div class="nav-bar">
-    <div class="nav-item selected"><span>🏠</span>首页</div>
-    <div class="nav-item"><span>🔥</span>三连号</div>
-    <div class="nav-item"><span>💎</span>四连号</div>
-    <div class="nav-item"><span>⭐</span>其他</div>
-    <div class="nav-item"><span>📞</span>联系</div>
-  </div>
+  <h4>支付方式</h4>
+  <p>Zelle / 微信 / 支付宝</p>
 
-  <script src="app.js"></script>
+  <h4>托管说明</h4>
+  <p>购买后请在20天内转出，否则每月收取$3托管费。</p>
+
+  <p class="brand">
+    © NumberMobi.com ｜ OpenAA 旗下品牌
+  </p>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
