@@ -31,7 +31,6 @@
   { "number": "9178098555", "sold": true },
   { "number": "9179202555", "sold": true },
   { "number": "9177813222", "sold": true },
-
   { "number": "9293712222", "price": 280, "hot": true },
   { "number": "9173292222", "price": 280 },
   { "number": "3473092222", "price": 280 },
@@ -39,7 +38,6 @@
   { "number": "9295612222", "price": 280 },
   { "number": "9292162222", "price": 280 },
   { "number": "6469862222", "price": 280 },
-
   { "number": "5703716666" },
   { "number": "5709877777" },
   { "number": "9789168888" },
