@@ -1,32 +1,42 @@
-<!-- 头部 -->
-<div class="top-bar">
-  <img src="logo.png" class="logo">
-  <div class="top-icons">
-    <button class="icon-btn">📌</button>
-    <button class="icon-btn">🏠</button>
-  </div>
-</div>
-<div class="search-wrapper">
-  <input class="search-input" placeholder="搜索靓号..." />
-  <button class="search-btn">🔍</button>
-</div>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>美国手机靓号｜NumberMobi</title>
+  <meta name="keywords" content="美国手机靓号,纽约手机号,三连号,四连号"/>
+  <meta name="description" content="优质美国靓号号码市场，蓝色简洁APP风格网格展示"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<!-- 网格卡片 -->
-<div class="phone-grid">
-  <!-- 单个卡片 -->
-  <div class="phone-card hot">
-    <div class="hot-badge">热卖</div>
-    <div class="number">(917)<br>516-9111</div>
-    <div class="price">$40</div>
+  <div class="top-bar">
+    <!-- logo建议直接用你的图片，也可用文字模拟，如下： -->
+    <div style="display: flex; align-items: center;">
+      <img src="https://openaa.com/static/logo.png" class="logo-img" alt="Logo" onerror="this.style.display='none';" />
+      <span class="domain-title">openaa.com</span>
+    </div>
+    <div class="top-icons">
+      <button class="icon-btn" title="首页">🏠</button>
+      <button class="icon-btn" title="置顶">📌</button>
+    </div>
   </div>
-  <!-- ...更多卡片 -->
-</div>
 
-<!-- 底部App Tab导航 -->
-<div class="nav-bar">
-  <div class="nav-item"><span>🏠</span>首页</div>
-  <div class="nav-item"><span>🔥</span>三连号</div>
-  <div class="nav-item"><span>💎</span>四连号</div>
-  <div class="nav-item"><span>⭐</span>其他</div>
-  <div class="nav-item"><span>📞</span>联系</div>
-</div>
+  <div class="search-wrapper">
+    <input class="search-input" id="searchInput" placeholder="搜索靓号…" autocomplete="off">
+    <button class="search-btn" id="searchBtn">🔍</button>
+  </div>
+
+  <div class="phone-grid" id="phoneGrid"></div>
+
+  <div class="nav-bar">
+    <div class="nav-item selected"><span>🏠</span>首页</div>
+    <div class="nav-item"><span>🔥</span>三连号</div>
+    <div class="nav-item"><span>💎</span>四连号</div>
+    <div class="nav-item"><span>⭐</span>其他</div>
+    <div class="nav-item"><span>📞</span>联系</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
