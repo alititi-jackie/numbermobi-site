@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>美国手机靓号市场 | NumberMobi</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <!-- Tabler UI -->
   <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet"/>
   <style>
     body { background-color: #f7fafe; }
@@ -16,35 +15,13 @@
       letter-spacing: 2px; margin-bottom: 0.3rem; line-height: 1.3;
     }
     .price { font-size: 1.12rem; color: #099a1f; font-weight: bold; }
-    .search-input { width: 100%; max-width: 380px; margin: 0 auto 1.2rem; }
-    /* 顶部栏始终悬浮 */
-    .topbar-custom {
-      position: sticky; top: 0; left: 0; right: 0;
-      z-index: 1040;
-      background: #1592e6;
-      box-shadow: 0 2px 10px #1680ea28;
-      padding: 0;
+    .search-input { width: 100%; max-width: 380px; margin: 0 auto 1.2rem;}
+    .topbar-nosticky .logo-img {
+      height: 36px; width: auto; display: inline-block; background: #fff; border-radius:7px;
+      border:1px solid #e6e9f4; margin-right: 11px; box-shadow:0 1px 5px #104cba23; padding: 3px 4px 3px 4px;
     }
-    .topbar-container {
-      padding:0.6rem 0.5rem 0.2rem 0.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo-img {
-      height: 36px; width: auto; display: inline-block;
-      background: #fff; border-radius:7px; border:1px solid #e6e9f4;
-      margin-right: 11px; box-shadow:0 1px 5px #104cba23;
-      padding: 3px 4px 3px 4px;
-    }
-    .topbar-title {
-      color: #fff;
-      font-size:1.22rem;font-weight:700;letter-spacing:1px;vertical-align:middle;
-      text-shadow:0 1px 1px #185dc16c;
-    }
-    .topbar-sub {
-      font-size: 1.02rem; font-weight: 400; margin-left: 9px;
-      color: #e3eaff; opacity:.92;
-      letter-spacing:0;
-    }
+    .topbar-title { color: #fff; font-size:1.22rem;font-weight:700;letter-spacing:1px;vertical-align:middle;text-shadow:0 1px 1px #185dc16c;}
+    .topbar-sub { font-size: 1.02rem; font-weight: 400; margin-left: 9px; color: #e3eaff; opacity:.92; letter-spacing:0; }
     .share-btn {
       background:rgba(255,255,255,0.18);
       border:none; border-radius:50%; width:40px; height:40px;
@@ -54,20 +31,27 @@
       box-shadow:0 1px 6px #1861a62b;
     }
     .share-btn:active { background:rgba(255,255,255,0.35);}
+    .searchbar-sticky {
+      position:sticky;
+      top:0;
+      z-index:1039;
+      background:#1592e6;
+      padding:0.85rem 0 0.5rem 0;
+      box-shadow:0 2px 10px #1680ea22;
+    }
     @media (max-width: 575px) {
       .number { font-size: 1.1rem;}
       .price { font-size: 1rem;}
-      .logo-img { height: 29px; padding:2px 2px}
+      .topbar-nosticky .logo-img { height: 29px; padding:2px 2px}
       .topbar-title { font-size:1.025rem;}
-      .topbar-container { padding-left:5px !important; padding-right:7px !important; }
-      .container-xl { padding-left: 6px; padding-right: 6px;}
+      .container-xl, .topbar-nosticky .container-xl, .searchbar-sticky .container-xl { padding-left: 8px; padding-right: 8px;}
     }
   </style>
 </head>
 <body>
-  <!-- 顶部栏 -->
-  <div class="topbar-custom">
-    <div class="container-xl topbar-container">
+  <!-- 顶部栏（非悬浮） -->
+  <div class="topbar-nosticky" style="background:#1592e6;">
+    <div class="container-xl d-flex align-items-center justify-content-between" style="padding:0.65rem 0.5rem;">
       <div class="d-flex align-items-center">
         <img src="https://openaa.com/logo.png" alt="OpenAA" class="logo-img" loading="lazy">
         <span class="topbar-title">
@@ -80,14 +64,17 @@
         <span aria-label="分享" role="img">↗️</span>
       </button>
     </div>
-    <!-- 搜索框 -->
-    <div class="container-xl pb-2">
+  </div>
+
+  <!-- 搜索框悬浮，sticky -->
+  <div class="searchbar-sticky">
+    <div class="container-xl">
       <input class="form-control form-control-lg search-input"
         style="background:#f2f5fa;border-radius:16px;border:none;font-size:1.02rem"
         placeholder="搜索靓号..." id="searchInput" autocomplete="off">
     </div>
   </div>
-  
+
   <!-- 主内容区 -->
   <div class="container-xl">
     <!-- 号码卡片网格 -->
@@ -98,7 +85,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- 联系弹窗 -->
   <div class="modal fade" id="contactModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -113,11 +100,11 @@
       </div>
     </div>
   </div>
-  
-  <!-- Tabler JS（含弹窗等） -->
+
+  <!-- Tabler JS -->
   <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
   <script>
-    // 分享按钮逻辑，优先用系统原生，否则复制网址
+    // 分享按钮逻辑
     function doShare() {
       const url = window.location.href;
       const text = 'NumberMobi 美国手机靓号，高性价比号码热卖，网址：';
@@ -146,14 +133,12 @@
         return;
       }
       grid.innerHTML = numbers.map(item => {
-        // 展示格式化号码
         let num = item.number;
-        if (num.length === 10) num = `(${num.slice(0,3)}) ${num.slice(3,6)}-${num.slice(6)}`;
-        // 热卖/已售tag
+        if (num.length === 10)
+          num = `(${num.slice(0,3)}) ${num.slice(3,6)}-${num.slice(6)}`;
         let badge = '';
         if (item.hot)  badge = `<span class="badge badge-top bg-danger-lt text-danger">热卖</span>`;
         if (item.sold) badge = `<span class="badge badge-top bg-secondary-lt">已售</span>`;
-        // 卡片
         return `
 <div class="col-6 col-md-4 col-lg-3 mb-4">
   <div class="card position-relative h-100${item.sold ? ' sold':''}" onclick="showContact()">
@@ -176,7 +161,7 @@
       }
       renderCards(allNumbers.filter(it=>it.number.includes(key)));
     }
-    
+
     // 联系方式弹窗
     function showContact() {
       const modal = new tabler.Modal(document.getElementById('contactModal'));
@@ -200,7 +185,6 @@
       modal.show();
     }
 
-    // 复制微信
     function copyWeChat() {
       const w = 'hola24';
       if (navigator.clipboard) {
@@ -217,12 +201,12 @@
     // 初始化
     window.onload = function() {
       fetch('./data/numbers.json')
-       .then(res=>res.json())
-       .then(data=>{
+        .then(res=>res.json())
+        .then(data=>{
           allNumbers = data;
           renderCards(allNumbers);
         });
-      
+
       document.getElementById('searchInput').addEventListener('input', e=>{
         doSearch(e.target.value);
       });
