@@ -15,13 +15,16 @@
       letter-spacing: 2px; margin-bottom: 0.3rem; line-height: 1.3;
     }
     .price { font-size: 1.12rem; color: #099a1f; font-weight: bold; }
+
+    /* 重点：sticky父元素是body，避免放container */
     .searchbar-sticky {
       position: sticky;
       top: 0;
-      z-index: 1039;
+      z-index: 1000;
+      width: 100%;
       background: #1592e6;
-      box-shadow: 0 2px 10px #1680ea22;
-      padding: .75rem 0 .5rem 0;
+      box-shadow: 0 3px 16px #179be424;
+      padding: .7rem 0 .5rem 0;
       display: flex;
       justify-content: center;
     }
@@ -32,7 +35,7 @@
       background: #f2f5fa;
       border-radius: 16px;
       border: none;
-      font-size: 1.02rem;
+      font-size: 1.09rem;
     }
     .topbar-nosticky .logo-img {
       height: 36px; width: auto; display: inline-block; background: #fff; border-radius:7px;
@@ -54,12 +57,11 @@
       .price { font-size: 1rem;}
       .topbar-nosticky .logo-img { height: 29px; padding:2px 2px}
       .topbar-title { font-size:1.025rem;}
-      .container-xl, .topbar-nosticky .container-xl { padding-left: 8px; padding-right: 8px;}
     }
   </style>
 </head>
 <body>
-  <!-- 顶部栏（非悬浮，随页面滚动） -->
+  <!-- 顶部栏（不悬浮，随内容滚动） -->
   <div class="topbar-nosticky" style="background:#1592e6;">
     <div class="container-xl d-flex align-items-center justify-content-between" style="padding:0.65rem 0.5rem;">
       <div class="d-flex align-items-center">
@@ -75,16 +77,15 @@
       </button>
     </div>
   </div>
-  
-  <!-- 搜索框单独sticky -->
+
+  <!-- 绝对全宽Sticky搜索栏（外层不能包container） -->
   <div class="searchbar-sticky">
     <input class="form-control form-control-lg search-input"
       placeholder="搜索靓号..." id="searchInput" autocomplete="off">
   </div>
 
-  <!-- 主内容区 -->
+  <!-- 主内容区放在container-xl -->
   <div class="container-xl">
-    <!-- 号码卡片网格 -->
     <div class="row" id="cardGrid"></div>
     <div class="row">
       <div class="col-12 text-center mt-3 mb-4 small text-muted">
@@ -110,7 +111,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
   <script>
-    // 分享按钮逻辑
     function doShare() {
       const url = window.location.href;
       const text = 'NumberMobi 美国手机靓号，高性价比号码热卖，网址：';
@@ -130,7 +130,6 @@
       }
     }
 
-    // 号码渲染逻辑
     let allNumbers = [];
     function renderCards(numbers) {
       const grid = document.getElementById('cardGrid');
@@ -216,7 +215,7 @@
     }
   </script>
 
-  <!-- 以下为页面底部说明和版权 -->
+  <!-- 说明区块与版权信息 -->
   <div class="container-xl">
     <div class="card mt-4 mb-2 shadow-none border-0" style="background:#fffbe6;">
       <div class="card-body small py-3">
