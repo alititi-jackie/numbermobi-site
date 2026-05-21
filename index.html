@@ -717,20 +717,20 @@
       <!-- 中间内容开始：以后只让 AI 修改这里，不要改顶部、广告轮播、8宫格、实用工具、底部导航 -->
       <section class="content-wrap numbermobi-page">
         <style>
-          .numbermobi-page { padding-left: 12px; padding-right: 12px; }
+          .numbermobi-page { padding-left: 12px; padding-right: 12px; padding-bottom: 28px; }
           .numbermobi-page .template-card { margin-bottom: 12px; }
           .nm-hero { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 55%, #f8fafc 100%); border: 1px solid #dbeafe; }
-          .nm-kicker { display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:999px; background:#dbeafe; color:#1d4ed8; font-size:12px; font-weight:800; margin-bottom:10px; }
-          .nm-hero h1 { font-size:24px; line-height:1.28; margin:0 0 10px; color:#111827; letter-spacing:-.4px; }
-          .nm-hero p { font-size:15px; color:#475569; line-height:1.75; margin:0; }
+          .nm-kicker { display:inline-flex; align-items:center; gap:6px; padding:7px 12px; border-radius:999px; background:#dbeafe; color:#1d4ed8; font-size:15px; line-height:1.2; font-weight:900; margin-bottom:10px; max-width:100%; white-space:normal; }
+          .nm-hero h1 { font-size:24px; line-height:1.25; margin:0 0 8px; color:#111827; letter-spacing:-.4px; }
+          .nm-hero p { font-size:15px; color:#475569; line-height:1.68; margin:0; }
           .nm-contact-row { display:grid; grid-template-columns:1fr; gap:8px; margin-top:12px; }
           .nm-contact-link { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:44px; padding:10px 12px; border-radius:14px; background:#fff; border:1px solid #e5e7eb; color:#2563eb; font-weight:800; font-size:14px; }
           .nm-contact-link span { color:#64748b; font-weight:600; font-size:12px; }
-          .nm-category-wrap { position: sticky; top: 56px; z-index: 88; margin: 0 -12px 12px; padding: 8px 12px; background: rgba(244,244,247,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(226,232,240,.9); }
+          .nm-category-wrap { position: sticky; top: 56px; z-index: 88; margin: 0 -12px 12px; padding: 8px 12px; background: rgba(244,244,247,.97); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top:1px solid rgba(219,234,254,.8); border-bottom: 1px solid rgba(226,232,240,.95); box-shadow:0 6px 18px rgba(15,23,42,.06); }
           .nm-category-shell { display:flex; align-items:center; gap:8px; }
           .nm-category-scroller { flex:1; min-width:0; display:flex; gap:8px; overflow-x:auto; scroll-behavior:smooth; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
           .nm-category-scroller::-webkit-scrollbar { display:none; }
-          .nm-cat-chip { flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; height:36px; padding:0 14px; border-radius:999px; border:1px solid #e5e7eb; background:#fff; color:#334155; font-size:14px; font-weight:800; white-space:nowrap; box-shadow:0 1px 3px rgba(15,23,42,.04); }
+          .nm-cat-chip { flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; height:36px; padding:0 14px; border-radius:999px; border:1px solid #e5e7eb; background:#fff; color:#334155; font-size:14px; font-weight:800; white-space:nowrap; box-shadow:0 1px 3px rgba(15,23,42,.04); transition:background .15s ease, color .15s ease, border-color .15s ease; }
           .nm-cat-chip.active, .nm-cat-chip:active { background:#2563eb; border-color:#2563eb; color:#fff; }
           .nm-arrow { display:none; flex:0 0 auto; width:34px; height:34px; border-radius:50%; border:1px solid #dbeafe; background:#fff; color:#2563eb; font-size:20px; font-weight:900; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgba(15,23,42,.08); }
           .nm-section { scroll-margin-top: 110px; background:#fff; border:1px solid #eceef3; border-radius:16px; padding:14px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.05); }
@@ -739,8 +739,9 @@
           .nm-section-head p { font-size:13px; line-height:1.55; color:#64748b; margin:0; }
           .nm-count { flex:0 0 auto; padding:5px 9px; border-radius:999px; background:#eff6ff; color:#2563eb; font-size:12px; font-weight:900; }
           .nm-number-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px; }
-          .nm-number-card { position:relative; min-height:86px; border:1px solid #e5e7eb; border-radius:14px; background:#f8fafc; padding:12px 8px 10px; text-align:center; cursor:pointer; transition: transform .15s ease, background .15s ease; }
+          .nm-number-card { position:relative; min-height:86px; border:1px solid #e5e7eb; border-radius:14px; background:#f8fafc; padding:12px 8px 10px; text-align:center; cursor:pointer; transition: transform .15s ease, background .15s ease, box-shadow .15s ease; }
           .nm-number-card:active { transform:scale(.97); background:#eff6ff; }
+          .nm-number-card:hover { box-shadow:0 6px 18px rgba(37,99,235,.10); }
           .nm-number { display:block; font-size:17px; line-height:1.25; font-weight:900; color:#2563eb; letter-spacing:.1px; }
           .nm-price { display:block; margin-top:5px; font-size:13px; font-weight:800; color:#0f766e; }
           .nm-badge { position:absolute; top:6px; right:6px; padding:2px 6px; border-radius:999px; background:#ef4444; color:#fff; font-size:11px; font-weight:900; }
@@ -752,6 +753,10 @@
           .nm-note-list { margin:8px 0 0; padding-left:18px; color:#52525b; font-size:14px; line-height:1.75; }
           .nm-fixed-contact { display:grid; gap:8px; margin-top:10px; }
           .nm-fixed-contact a, .nm-fixed-contact button { width:100%; border:1px solid #dbeafe; border-radius:14px; background:#eff6ff; color:#2563eb; padding:11px 12px; font-size:14px; font-weight:900; text-align:center; cursor:pointer; }
+          @media (max-width: 380px) {
+            .nm-kicker { font-size:14px; padding:7px 10px; }
+            .nm-hero h1 { font-size:22px; }
+          }
           @media (min-width: 560px) {
             .nm-number-grid { grid-template-columns:repeat(3, minmax(0, 1fr)); }
             .nm-arrow { display:inline-flex; align-items:center; justify-content:center; }
@@ -765,7 +770,8 @@
         <article class="template-card nm-hero" id="top">
           <span class="nm-kicker">NumberMobi.com · 美国手机靓号网</span>
           <h1>美国手机靓号出售：三连号、四连号、精品好记号码</h1>
-          <p> NumberMobi 现显示包括纽约 917、347、646、929 等常用区号，以及三连号、四连号和其它好记号码。如你想要其它地区靓号，请电话或微信咨询。
+          <p>NumberMobi 现显示包括纽约 917、347、646、929 等常用区号，以及三连号、四连号和其它好记号码。如你想要其它地区靓号，请电话或微信咨询。</p>
+        </article>
 
         <nav class="nm-category-wrap" aria-label="号码分类导航">
           <div class="nm-category-shell">
@@ -853,6 +859,20 @@
           document.querySelectorAll('.nm-cat-chip').forEach(function(a) {
             a.addEventListener('click', function() { setNmActive(a.getAttribute('href')); });
           });
+
+          if (location.hash) setNmActive(location.hash);
+
+          if ('IntersectionObserver' in window) {
+            var nmObserver = new IntersectionObserver(function(entries) {
+              entries.forEach(function(entry) {
+                if (entry.isIntersecting) setNmActive('#' + entry.target.id);
+              });
+            }, { root: null, rootMargin: '-120px 0px -65% 0px', threshold: 0.01 });
+            ['top', 'triple', 'quad', 'other', 'buy-note', 'contact'].forEach(function(id) {
+              var node = document.getElementById(id);
+              if (node) nmObserver.observe(node);
+            });
+          }
 
           function showNmToast(message) {
             if (typeof showToast === 'function') { showToast(message); return; }
