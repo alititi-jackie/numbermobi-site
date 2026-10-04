@@ -73,8 +73,12 @@ def card(item):
 for key in ("triple", "quad", "other"):
     items = data.get(key) if isinstance(data.get(key), list) else []
     cards = "".join(card(item) for item in items)
+
+    # The source grid contains a nested .nm-loading div. Match the COMPLETE
+    # outer grid so the original outer closing </div> is not left behind.
     grid_pattern = re.compile(
-        rf'<div class="nm-number-grid" id="{key}Grid">.*?</div>',
+        rf'<div class="nm-number-grid" id="{key}Grid">\s*'
+        rf'<div class="nm-loading">.*?</div>\s*</div>',
         re.DOTALL,
     )
     replacement = f'<div class="nm-number-grid" id="{key}Grid">{cards}</div>'
@@ -88,4 +92,4 @@ for key in ("triple", "quad", "other"):
         raise SystemExit(f"Could not update {key} count")
 
 INDEX.write_text(text, encoding="utf-8")
-print("Homepage prepared: guides added and numbers pre-rendered")
+print("Homepage prepared: guides added and numbers pre-rendered with valid grid markup")
