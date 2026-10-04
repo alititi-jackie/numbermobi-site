@@ -31,12 +31,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build NumberMobi homepage SEO content
+        run: python scripts/build-homepage.py
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Upload entire repository after the homepage build step
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
