@@ -27,7 +27,7 @@ jobs:
       - name: Build NumberMobi homepage SEO content
         run: python scripts/build-homepage.py
       - name: Bust guide stylesheet cache
-        run: find guides -name '*.html' -type f -exec sed -i 's#/guides/styles.css#/guides/styles.css?v=20261004-3#g' {} +
+        run: find guides -name '*.html' -type f -exec sed -i "s#/guides/styles.css#/guides/styles.css?v=${GITHUB_SHA}#g" {} +
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
