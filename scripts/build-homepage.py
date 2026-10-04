@@ -1,11 +1,7 @@
 from pathlib import Path
-import html
-import json
-import re
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
-NUMBERS = ROOT / "numbers.json"
 
 text = INDEX.read_text(encoding="utf-8")
 
@@ -38,58 +34,7 @@ if guide_marker not in text:
 '''
     text = text.replace(buy_anchor, guide_block + buy_anchor, 1)
 
-# 3) Pre-render numbers from the single source of truth (numbers.json).
-#    Existing JS still refreshes the same grids in the browser, so functionality stays unchanged.
-data = json.loads(NUMBERS.read_text(encoding="utf-8"))
-
-def format_number(raw):
-    digits = re.sub(r"\D", "", str(raw or ""))
-    if len(digits) == 11 and digits.startswith("1"):
-        digits = digits[1:]
-    if len(digits) == 10:
-        return f"({digits[:3]}) {digits[3:6]}-{digits[6:]}"
-    return str(raw or "")
-
-def card(item):
-    formatted = format_number(item.get("number"))
-    sold = bool(item.get("sold"))
-    classes = "nm-number-card is-sold" if sold else "nm-number-card"
-    if sold:
-        badge = '<span class="nm-badge sold">已售</span>'
-        price = "已售出"
-        click = "showNmToast('此号码已售出')"
-    else:
-        badge = '<span class="nm-badge">热卖</span>' if item.get("hot") else ""
-        price = f"${item['price']}" if "price" in item else "请咨询"
-        safe_js = formatted.replace("\\", "\\\\").replace("'", "\\'")
-        click = f"openNmContact('{safe_js}')"
-    return (
-        f'<button class="{classes}" type="button" onclick="{html.escape(click, quote=True)}" '
-        f'aria-label="{html.escape(formatted, quote=True)}">{badge}'
-        f'<span class="nm-number">{html.escape(formatted)}</span>'
-        f'<span class="nm-price">{html.escape(price)}</span></button>'
-    )
-
-for key in ("triple", "quad", "other"):
-    items = data.get(key) if isinstance(data.get(key), list) else []
-    cards = "".join(card(item) for item in items)
-
-    # The source grid contains a nested .nm-loading div. Match the COMPLETE
-    # outer grid so the original outer closing </div> is not left behind.
-    grid_pattern = re.compile(
-        rf'<div class="nm-number-grid" id="{key}Grid">\s*'
-        rf'<div class="nm-loading">.*?</div>\s*</div>',
-        re.DOTALL,
-    )
-    replacement = f'<div class="nm-number-grid" id="{key}Grid">{cards}</div>'
-    text, n = grid_pattern.subn(replacement, text, count=1)
-    if n != 1:
-        raise SystemExit(f"Could not pre-render {key} grid")
-
-    count_pattern = re.compile(rf'(<span class="nm-count" id="{key}Count">).*?(</span>)')
-    text, n = count_pattern.subn(rf'\g<1>{len(items)} 个\g<2>', text, count=1)
-    if n != 1:
-        raise SystemExit(f"Could not update {key} count")
-
+# Important: do not rewrite number grids during deployment.
+# Existing numbers.json + frontend JavaScript rendering is the stable source of truth.
 INDEX.write_text(text, encoding="utf-8")
-print("Homepage prepared: guides added and numbers pre-rendered with valid grid markup")
+print("Homepage prepared: guides added; number grids left untouched")
