@@ -946,6 +946,7 @@
                 renderNmGroup('triple', data);
                 renderNmGroup('quad', data);
                 renderNmGroup('other', data);
+                if (location.hash) { var nmHt = document.getElementById(location.hash.slice(1)); if (nmHt) nmHt.scrollIntoView(); }
                 return;
               } catch (err) { lastError = err; }
             }
