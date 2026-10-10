@@ -6,7 +6,7 @@
     if (header && !header.querySelector('.nm-header-inner')) {
       header.innerHTML =
         '<div class="nm-header-inner">' +
-          '<a class="nm-brand" href="/" aria-label="NumberMobi 首页"><img src="/logo.png" alt="" width="32" height="32"><span>NumberMobi</span></a>' +
+          '<a class="nm-brand" href="/" aria-label="NumberMobi 首页"><img src="/logo.png" alt="" width="32" height="32"><span class="nm-brand-number">Number</span><span class="nm-brand-mobi">Mobi</span></a>' +
           '<div class="nm-header-actions">' +
             '<a class="nm-icon-button" href="' + GO_URL + '" aria-label="打开导航" title="导航">' +
               '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>' +
