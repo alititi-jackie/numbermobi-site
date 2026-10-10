@@ -599,7 +599,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
 @media(max-width:600px){body{box-shadow:none}.header-inner{padding:8px 14px}}
 </style><script>document.addEventListener('click',async e=>{const b=e.target.closest('[data-share]');if(!b)return;try{if(navigator.share)await navigator.share({title:document.title,text:'NumberMobi 美国手机靓号',url:location.href});else{await navigator.clipboard.writeText(location.href);showToast('链接已复制')}}catch(err){if(err.name!=='AbortError')showToast('请复制当前页面链接')}})</script></head>
 <body class="numbermobi-site">
-  <div class="app-shell"><header class="site-header"><div class="header-inner"><a class="brand" href="/" aria-label="NumberMobi 首页"><span class="brand-icon" aria-hidden="true">▯</span><span class="brand-name"><span class="brand-number">Number</span>Mobi</span></a><div class="header-actions"><a class="share-button go-button" href="https://go.openaa.com/" aria-label="打开 OpenAA Go 导航" title="OpenAA Go 导航"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg></a><button class="share-button" type="button" data-share aria-label="分享当前页面" title="分享当前页面"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.7 10.7 6.6-4.4"></path><path d="m8.7 13.3 6.6 4.4"></path></svg></button></div></div></header><main>
+  <div class="app-shell"><header class="site-header"><div class="header-inner"><a class="brand" href="/" aria-label="NumberMobi 首页"><img class="brand-logo" src="/logo.png" alt="" width="32" height="32"><span class="brand-name">NumberMobi</span></a><div class="header-actions"><a class="share-button go-button" href="https://go.openaa.com/" aria-label="打开 OpenAA Go 导航" title="OpenAA Go 导航"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg></a><button class="share-button" type="button" data-share aria-label="分享当前页面" title="分享当前页面"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.7 10.7 6.6-4.4"></path><path d="m8.7 13.3 6.6 4.4"></path></svg></button></div></div></header><main>
       <section class="content-wrap numbermobi-page">
         <style>
           .numbermobi-page { padding-left: 12px; padding-right: 12px; padding-bottom: 28px; }
@@ -618,6 +618,17 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           .nm-cat-chip { flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; height:36px; padding:0 14px; border-radius:999px; border:1px solid #e5e7eb; background:#fff; color:#334155; font-size:14px; font-weight:800; white-space:nowrap; box-shadow:0 1px 3px rgba(15,23,42,.04); transition:background .15s ease, color .15s ease, border-color .15s ease; }
           .nm-cat-chip.active, .nm-cat-chip:active { background:#2563eb; border-color:#2563eb; color:#fff; }
           .nm-arrow { display:none; flex:0 0 auto; width:34px; height:34px; border-radius:50%; border:1px solid #dbeafe; background:#fff; color:#2563eb; font-size:20px; font-weight:900; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgba(15,23,42,.08); }
+          .brand-logo{display:block;width:32px;height:32px;object-fit:contain;flex:0 0 auto}
+          .brand-name{display:inline-flex;align-items:baseline;color:#0f172a}
+          .nm-search-sticky{position:sticky;top:108px;z-index:87;margin:-12px -12px 12px;padding:8px 12px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e5e7eb}
+          .nm-search-form{display:flex;align-items:center;gap:8px;width:100%;max-width:100%;margin:0}
+          .nm-search-form input{flex:1;min-width:0;height:42px;border:1px solid #d1d5db;border-radius:10px;background:#fff;padding:0 12px;font:inherit;font-size:15px;color:#111827;outline:none}
+          .nm-search-form input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.10)}
+          .nm-search-form button{height:42px;min-width:62px;padding:0 15px;border:1px solid #2563eb;border-radius:10px;background:#2563eb;color:#fff;font-size:14px;font-weight:800;cursor:pointer}
+          .nm-search-form button:active{background:#1d4ed8}
+          .nm-search-results[hidden]{display:none!important}
+          .nm-search-results{scroll-margin-top:164px}
+          .nm-search-count{font-size:13px;color:#64748b;margin-bottom:10px}
           .nm-section { scroll-margin-top: 110px; background:#fff; border:1px solid #eceef3; border-radius:16px; padding:14px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.05); }
           .nm-section-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px; }
           .nm-section-head h2 { font-size:18px; line-height:1.3; margin:0 0 5px; color:#111827; }
@@ -672,6 +683,17 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             <button class="nm-arrow" type="button" aria-label="向右滑动分类" onclick="scrollNmCats(1)">›</button>
           </div>
         </nav>
+
+        <div class="nm-search-sticky" id="number-search">
+          <form class="nm-search-form" id="nmSearchForm" role="search">
+            <input id="nmSearchInput" type="search" aria-label="搜索号码" placeholder="搜索号码、区号或尾号" autocomplete="off">
+            <button type="submit" aria-label="搜索号码">搜索</button>
+          </form>
+        </div>
+        <section class="nm-section nm-search-results" id="nmSearchResults" hidden aria-live="polite">
+          <div class="nm-search-count" id="nmSearchCount"></div>
+          <div class="nm-number-grid" id="searchGrid"></div>
+        </section>
 
         <section class="nm-section" id="triple">
           <div class="nm-section-head">
@@ -820,6 +842,54 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             }
           }
 
+          var NM_NUMBER_DATA = null;
+          function runNmSearch(value) {
+            var input = document.getElementById('nmSearchInput');
+            var results = document.getElementById('nmSearchResults');
+            var count = document.getElementById('nmSearchCount');
+            var query = String(value == null ? (input ? input.value : '') : value).trim().toLowerCase();
+            var digits = query.replace(/\D/g, '');
+            var sections = ['triple', 'quad', 'other'];
+            if (!query) {
+              if (results) results.hidden = true;
+              sections.forEach(function(key) { var el = document.getElementById(key); if (el) el.hidden = false; });
+              return;
+            }
+            sections.forEach(function(key) { var el = document.getElementById(key); if (el) el.hidden = true; });
+            if (results) results.hidden = false;
+            var data = NM_NUMBER_DATA || {};
+            var all = [];
+            ['triple', 'quad', 'other'].forEach(function(group) {
+              (Array.isArray(data[group]) ? data[group] : []).forEach(function(item) {
+                all.push(Object.assign({}, item, {_nmGroup: group}));
+              });
+            });
+            var matched = all.filter(function(item) {
+              var number = String(item.number || '').replace(/\D/g, '');
+              var group = item._nmGroup;
+              var groupText = group === 'triple' ? '三连号 三连' : group === 'quad' ? '四连号 四连' : '精品 好记号 其它';
+              var searchable = [String(item.number || ''), number, groupText, item.sold ? '已售 已售出' : '', item.hot ? '热卖 热门' : '', item.price != null ? String(item.price) : ''].join(' ').toLowerCase();
+              if (digits && number.indexOf(digits) >= 0) return true;
+              if (query.indexOf('三连') >= 0 && group === 'triple') return true;
+              if (query.indexOf('四连') >= 0 && group === 'quad') return true;
+              if ((query.indexOf('精品') >= 0 || query.indexOf('好记') >= 0) && group === 'other') return true;
+              if ((query.indexOf('热卖') >= 0 || query.indexOf('热门') >= 0) && item.hot) return true;
+              if ((query.indexOf('已售') >= 0 || query.indexOf('售出') >= 0) && item.sold) return true;
+              return searchable.indexOf(query) >= 0;
+            });
+            if (count) count.textContent = matched.length ? '找到 ' + matched.length + ' 个号码' : '没有找到符合条件的号码';
+            renderNmGroup('search', {search: matched});
+            var grid = document.getElementById('searchGrid');
+            if (grid && !matched.length) grid.innerHTML = '<div class="nm-loading">试试输入区号（如 917）、尾号（如 8888）或更短的数字</div>';
+          }
+          var nmSearchForm = document.getElementById('nmSearchForm');
+          var nmSearchInput = document.getElementById('nmSearchInput');
+          if (nmSearchForm) nmSearchForm.addEventListener('submit', function(event) { event.preventDefault(); runNmSearch(); });
+          if (nmSearchInput) {
+            nmSearchInput.addEventListener('input', function() { runNmSearch(); });
+            nmSearchInput.addEventListener('search', function() { runNmSearch(); });
+          }
+
           async function loadNmNumbers() {
             var lastError;
             for (var i = 0; i < NM_NUMBER_FILE_CANDIDATES.length; i++) {
@@ -827,9 +897,12 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
                 var res = await fetch(NM_NUMBER_FILE_CANDIDATES[i], { cache: 'no-store' });
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 var data = await res.json();
+                NM_NUMBER_DATA = data;
                 renderNmGroup('triple', data);
                 renderNmGroup('quad', data);
                 renderNmGroup('other', data);
+                var initialQuery = new URLSearchParams(location.search).get('q') || '';
+                if (nmSearchInput && initialQuery) { nmSearchInput.value = initialQuery; runNmSearch(initialQuery); }
                 if (location.hash) { var nmHt = document.getElementById(location.hash.slice(1)); if (nmHt) nmHt.scrollIntoView(); }
                 return;
               } catch (err) { lastError = err; }
