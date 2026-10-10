@@ -26,6 +26,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Build NumberMobi homepage SEO content
         run: python scripts/build-homepage.py
+      - name: Build shared NumberMobi guide header and search
+        run: python scripts/build-guide-header.py
       - name: Bust guide stylesheet cache
         run: find guides -name '*.html' -type f -exec sed -i "s#/guides/styles.css#/guides/styles.css?v=${GITHUB_SHA}#g" {} +
       - name: Setup Pages
