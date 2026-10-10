@@ -20,7 +20,7 @@
     if (header && !document.querySelector('.nm-guide-search')) {
       var bar = document.createElement('div');
       bar.className = 'nm-guide-search';
-      bar.innerHTML = '<form action="/" method="get" role="search"><input type="search" name="q" aria-label="搜索号码" placeholder="搜索号码、区号或尾号" autocomplete="off"><button type="submit" aria-label="搜索">搜索</button></form>';
+      bar.innerHTML = '<form action="/#number-search" method="get" role="search"><input type="search" name="q" aria-label="搜索号码" placeholder="搜索号码、区号或尾号" autocomplete="off"><button type="submit" aria-label="搜索">搜索</button></form>';
       header.insertAdjacentElement('afterend', bar);
     }
     var formInput = document.querySelector('.nm-guide-search input[name="q"]');
