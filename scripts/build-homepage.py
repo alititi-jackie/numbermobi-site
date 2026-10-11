@@ -40,7 +40,7 @@ inventory_block = '''        <article class="template-card" id="buy-note">
           <h2>美国各州更多号码，欢迎咨询</h2>
           <p><strong>网站仅展示部分号码，并非全部库存。</strong>目前美国多个州还有更多号码资源，但部分号码尚未整理上架，网页显示的号码、库存状态及价格可能未及时更新，实际可售情况请以联系确认为准。</p>
           <p>如需指定州、区号、生日号、连号、特殊数字组合或容易记忆的尾号，欢迎直接添加微信或致电查询。网页上没有找到心仪号码，也欢迎咨询，我们会根据您的需求协助查询更多库存及相近选择。</p>
-          <div class="notice-box"><strong>想了解更多号码？</strong> 添加微信咨询 。支持微信、Zelle 等付款方式，具体付款方式请联系确认。付款前请确认号码、最终价格及转网要求。</div>
+          <div class="notice-box"><strong>想了解更多号码？</strong><p>网页仅展示部分号码；如需其他地区、区号或特定尾号，欢迎通过电话或微信联系确认。</p><div class="nm-fixed-contact"><a href="#contact" aria-label="查看电话和微信联系方式">联系咨询</a></div><p style="margin-top:8px">付款前请确认号码、最终价格及转网要求。</p></div>
           <p style="margin-top:12px"><a href="/purchase-guide/" style="color:#2563eb;font-weight:800">查看完整购买说明及购买须知 →</a></p>
         </article>'''
 text, count = re.subn(
