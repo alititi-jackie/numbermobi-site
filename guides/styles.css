@@ -29,3 +29,12 @@ main{padding:14px 16px 24px;background:#fff}
 .nm-guide-search input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 .nm-guide-search button{height:42px;min-width:62px;padding:0 15px;border:1px solid #2563eb;border-radius:10px;background:#2563eb;color:#fff;font-size:14px;font-weight:800;cursor:pointer}
 @media(max-width:600px){.nm-header-inner{padding:0 14px}.nm-guide-search{padding:8px 12px}.nm-brand{font-size:20px}}
+
+
+/* Unified NumberMobi footer, shared by guide articles and purchase information */
+.nm-site-footer{margin:28px auto 0;padding:18px 16px 16px;border-top:1px solid #dbe3ee;background:#fff;color:#64748b;text-align:center;font-size:13px;line-height:1.6}
+.nm-site-footer nav{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,24px);flex-wrap:wrap;margin:0 0 10px}
+.nm-site-footer nav a{color:#475569;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap}
+.nm-site-footer nav a:hover,.nm-site-footer nav a:focus-visible{color:#2563eb}
+.nm-site-footer p{margin:0;color:#64748b;font-size:12px}
+@media(max-width:380px){.nm-site-footer{padding:16px 10px}.nm-site-footer nav{column-gap:12px;row-gap:8px}.nm-site-footer nav a{font-size:13px}}
