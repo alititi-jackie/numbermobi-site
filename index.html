@@ -597,7 +597,25 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
 .site-footer nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:10px 0}
 .site-footer a{color:#475569}
 @media(max-width:600px){body{box-shadow:none}.header-inner{padding:8px 14px}}
-</style><script>document.addEventListener('click',async e=>{const b=e.target.closest('[data-share]');if(!b)return;try{if(navigator.share)await navigator.share({title:document.title,text:'NumberMobi 美国手机靓号',url:location.href});else{await navigator.clipboard.writeText(location.href);showToast('链接已复制')}}catch(err){if(err.name!=='AbortError')showToast('请复制当前页面链接')}})</script></head>
+</style><script>document.addEventListener('click',async e=>{const b=e.target.closest('[data-share]');if(!b)return;try{if(navigator.share)await navigator.share({title:document.title,text:'NumberMobi 美国手机靓号',url:location.href});else{await navigator.clipboard.writeText(location.href);showToast('链接已复制')}}catch(err){if(err.name!=='AbortError')showToast('请复制当前页面链接')}})</script><style>
+.nm-contact-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.48);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.nm-contact-overlay[hidden]{display:none!important}body.nm-contact-open{overflow:hidden}
+.nm-contact-dialog{position:relative;width:100%;max-width:410px;padding:28px 22px 20px;border-radius:20px;background:#fff;box-shadow:0 24px 70px rgba(15,23,42,.25);text-align:center;color:#18181b}
+.nm-contact-close{position:absolute;top:10px;right:12px;width:34px;height:34px;border:0;border-radius:50%;background:#f4f4f5;color:#71717a;font-size:25px;line-height:1;cursor:pointer}
+.nm-contact-mark{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;margin-bottom:12px;border-radius:15px;background:#ecfdf5;color:#15803d;font-size:14px;font-weight:800}
+.nm-contact-dialog h2{margin:0 24px 12px;font-size:20px;line-height:1.4;font-weight:800}
+.nm-contact-intro{margin:0 0 4px;color:#3f3f46;font-size:16px;line-height:1.6}.nm-contact-intro strong{color:#15803d;font-size:19px}
+.nm-contact-desc{margin:0 0 18px;color:#71717a;font-size:13px;line-height:1.6}
+.nm-contact-number-label{margin-bottom:6px;color:#71717a;font-size:12px}
+.nm-contact-number{padding:12px 10px;border:1px solid #dbeafe;border-radius:12px;background:#eff6ff;color:#1d4ed8;font-size:22px;font-weight:800;letter-spacing:.3px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.nm-contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.nm-contact-actions button{min-height:46px;padding:10px 8px;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;line-height:1.3;-webkit-tap-highlight-color:transparent}
+.nm-contact-copy-primary{border:1px solid #2563eb;background:#2563eb;color:#fff}.nm-contact-copy-secondary{border:1px solid #bfdbfe;background:#fff;color:#1d4ed8}
+.nm-contact-tip{margin:13px 0 0;color:#a1a1aa;font-size:12px;line-height:1.5}
+@media(max-width:360px){.nm-contact-overlay{padding:14px}.nm-contact-dialog{padding:26px 16px 18px}.nm-contact-actions{gap:7px}.nm-contact-actions button{font-size:12px;padding-left:4px;padding-right:4px}}
+</style>
+
+</head>
 <body class="numbermobi-site">
   <div class="app-shell"><header class="site-header"><div class="header-inner"><a class="brand" href="/" aria-label="NumberMobi 首页"><img class="brand-logo" src="/logo.png" alt="" width="32" height="32"><span class="brand-name"><span class="brand-number" style="color:#2563eb!important">Number</span><span class="brand-mobi" style="color:#0f172a!important">Mobi</span></span></a><div class="header-actions"><a class="share-button go-button" href="https://go.openaa.com/" aria-label="打开 OpenAA Go 导航" title="OpenAA Go 导航"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg></a><button class="share-button" type="button" data-share aria-label="分享当前页面" title="分享当前页面"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.7 10.7 6.6-4.4"></path><path d="m8.7 13.3 6.6 4.4"></path></svg></button></div></div></header><main>
       <section class="content-wrap numbermobi-page">
@@ -807,14 +825,73 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             alert(message);
           }
 
+          function copyNmText(value, successMessage) {
+            var text = String(value || '');
+            if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(text).then(function() {
+                showNmToast(successMessage);
+              }).catch(function() {
+                showNmToast('复制失败，请手动复制：' + text);
+              });
+            } else {
+              showNmToast('请手动复制：' + text);
+            }
+          }
+
           function copyNmWechat() {
-            if (navigator.clipboard) {
-              navigator.clipboard.writeText('hola24').then(function() { showNmToast('微信号已复制：hola24'); });
-            } else { showNmToast('微信号：hola24'); }
+            copyNmText('hola24', '微信号已复制：hola24');
+          }
+
+          var nmContactModal = null;
+          var nmContactNumber = '';
+          function ensureNmContactModal() {
+            if (nmContactModal) return nmContactModal;
+            nmContactModal = document.createElement('div');
+            nmContactModal.className = 'nm-contact-overlay';
+            nmContactModal.hidden = true;
+            nmContactModal.innerHTML = '<section class="nm-contact-dialog" role="dialog" aria-modal="true" aria-labelledby="nmContactTitle">' +
+              '<button class="nm-contact-close" type="button" aria-label="关闭弹窗">×</button>' +
+              '<div class="nm-contact-mark" aria-hidden="true">微信</div>' +
+              '<h2 id="nmContactTitle">查询号码在售情况</h2>' +
+              '<p class="nm-contact-intro">请添加微信：<strong>hola24</strong></p>' +
+              '<p class="nm-contact-desc">查询号码是否仍在售及购买事宜。</p>' +
+              '<div class="nm-contact-number-label">您选择的手机号</div>' +
+              '<div class="nm-contact-number" id="nmContactNumber"></div>' +
+              '<div class="nm-contact-actions">' +
+              '<button class="nm-contact-copy-primary" type="button" id="nmCopyWechatBtn">复制微信号</button>' +
+              '<button class="nm-contact-copy-secondary" type="button" id="nmCopyNumberBtn">复制当前手机号</button>' +
+              '</div>' +
+              '<p class="nm-contact-tip">添加微信时，请备注您要查询的手机号。</p>' +
+              '</section>';
+            document.body.appendChild(nmContactModal);
+            nmContactModal.addEventListener('click', function(event) {
+              if (event.target === nmContactModal || event.target.classList.contains('nm-contact-close')) closeNmContact();
+            });
+            nmContactModal.querySelector('#nmCopyWechatBtn').addEventListener('click', function() {
+              copyNmText('hola24', '微信号已复制：hola24');
+            });
+            nmContactModal.querySelector('#nmCopyNumberBtn').addEventListener('click', function() {
+              copyNmText(nmContactNumber, '手机号已复制：' + nmContactNumber);
+            });
+            document.addEventListener('keydown', function(event) {
+              if (event.key === 'Escape' && nmContactModal && !nmContactModal.hidden) closeNmContact();
+            });
+            return nmContactModal;
           }
 
           function openNmContact(number) {
-            showNmToast('请联系确认号码：' + number);
+            nmContactNumber = String(number || '').trim();
+            var modal = ensureNmContactModal();
+            modal.querySelector('#nmContactNumber').textContent = nmContactNumber;
+            modal.hidden = false;
+            document.body.classList.add('nm-contact-open');
+            var closeButton = modal.querySelector('.nm-contact-close');
+            if (closeButton) closeButton.focus();
+          }
+
+          function closeNmContact() {
+            if (nmContactModal) nmContactModal.hidden = true;
+            document.body.classList.remove('nm-contact-open');
           }
 
           function formatNmNumber(raw) {
