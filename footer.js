@@ -11,16 +11,19 @@
     '<p>© 2026 NumberMobi · 美国手机靓号</p>';
 
   function initBackToTop() {
-    if (document.querySelector('.nm-back-to-top')) return;
-
-    var button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'nm-back-to-top';
-    button.setAttribute('aria-label', '回到顶部');
-    button.setAttribute('title', '回到顶部');
-    button.innerHTML =
-      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7M12 5v14"></path></svg>';
-    document.body.appendChild(button);
+    var button = document.querySelector('.nm-back-to-top');
+    if (!button) {
+      button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'nm-back-to-top';
+      button.setAttribute('aria-label', '回到顶部');
+      button.setAttribute('title', '回到顶部');
+      button.innerHTML =
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7M12 5v14"></path></svg>';
+      document.body.appendChild(button);
+    }
+    if (button.getAttribute('data-nm-back-top-ready') === 'true') return;
+    button.setAttribute('data-nm-back-top-ready', 'true');
 
     function updateVisibility() {
       button.classList.toggle('is-visible', (window.scrollY || document.documentElement.scrollTop || 0) > 900);
