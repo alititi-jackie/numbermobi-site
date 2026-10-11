@@ -1,4 +1,4 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Deploy static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Build NumberMobi homepage SEO content
         run: python scripts/build-homepage.py
       - name: Build shared NumberMobi guide header and search
@@ -31,11 +31,11 @@ jobs:
       - name: Bust guide stylesheet cache
         run: find guides -name '*.html' -type f -exec sed -i "s#/guides/styles.css#/guides/styles.css?v=${GITHUB_SHA}#g" {} +
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
