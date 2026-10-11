@@ -627,7 +627,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           .nm-search-form button{height:42px;min-width:62px;padding:0 15px;border:1px solid #2563eb;border-radius:10px;background:#2563eb;color:#fff;font-size:14px;font-weight:800;cursor:pointer}
           .nm-search-form button:active{background:#1d4ed8}
           .nm-search-results[hidden]{display:none!important}
-          .nm-search-results{scroll-margin-top:180px;position:relative;z-index:1}
+          .nm-search-results{scroll-margin-top:180px;position:relative;z-index:1}.nm-search-results.nm-search-results-active{position:sticky;top:170px;z-index:80;max-height:calc(100vh - 182px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
           .nm-search-count{font-size:13px;color:#64748b;margin-bottom:10px}
           .nm-section { scroll-margin-top: 110px; background:#fff; border:1px solid #eceef3; border-radius:16px; padding:14px; margin-bottom:12px; box-shadow:0 1px 4px rgba(0,0,0,.05); }
           .nm-section-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px; }
@@ -851,12 +851,12 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             var digits = query.replace(/\D/g, '');
             var sections = ['triple', 'quad', 'other'];
             if (!query) {
-              if (results) results.hidden = true;
+              if (results) { results.hidden = true; results.classList.remove('nm-search-results-active'); }
               sections.forEach(function(key) { var el = document.getElementById(key); if (el) el.hidden = false; });
               return;
             }
             sections.forEach(function(key) { var el = document.getElementById(key); if (el) el.hidden = true; });
-            if (results) results.hidden = false;
+            if (results) { results.hidden = false; results.classList.add('nm-search-results-active'); }
             var data = NM_NUMBER_DATA || {};
             var all = [];
             ['triple', 'quad', 'other'].forEach(function(group) {
