@@ -53,4 +53,12 @@
     }
   });
   initNumberMobiGuideHeader();
+
+  // Reuse one footer implementation across the guide directory and purchase page.
+  if (!document.querySelector('script[data-nm-footer-loader]')) {
+    var footerScript = document.createElement('script');
+    footerScript.src = '/footer.js?v=20261011';
+    footerScript.setAttribute('data-nm-footer-loader', 'true');
+    document.head.appendChild(footerScript);
+  }
 })();
