@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var GO_URL = 'https://go.openaa.com/';
+  var GO_URL = 'https://go.openaa.com/?utm_source=numbermobi&utm_medium=guides&utm_campaign=guide-header-nav';
   function initNumberMobiGuideHeader() {
     var header = document.querySelector('.shell > header, .shell header, header');
     if (header && !header.querySelector('.nm-header-inner')) {
@@ -20,8 +20,14 @@
     if (header && !document.querySelector('.nm-guide-search')) {
       var bar = document.createElement('div');
       bar.className = 'nm-guide-search';
-      bar.innerHTML = '<form action="/#number-search" method="get" role="search"><input type="search" name="q" aria-label="搜索号码" placeholder="搜索号码、区号或尾号" autocomplete="off"><button type="submit" aria-label="搜索">搜索</button></form>';
+      bar.innerHTML = '<form action="/" method="get" role="search"><input type="search" name="q" aria-label="搜索号码" placeholder="搜索号码、区号或尾号" autocomplete="off"><button type="submit" aria-label="搜索">搜索</button></form>';
       header.insertAdjacentElement('afterend', bar);
+      var guideForm = bar.querySelector('form');
+      guideForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var q = bar.querySelector('input[name="q"]').value.trim();
+        window.location.href = q ? '/?q=' + encodeURIComponent(q) + '#number-search' : '/#number-search';
+      });
     }
     var formInput = document.querySelector('.nm-guide-search input[name="q"]');
     if (formInput) {
