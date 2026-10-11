@@ -795,7 +795,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
         </footer>
 
         <script>
-          var NM_NUMBER_FILE_CANDIDATES = ['numbers.json', './numbers.json', 'numbers(1).json', './numbers(1).json'];
+          var NM_NUMBER_FILE_CANDIDATES = ['/numbers.json'];
 
           function scrollNmCats(dir) {
             var el = document.getElementById('nmCategoryScroller');
@@ -998,7 +998,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             });
             var first = document.getElementById('triple');
             if (first && !document.getElementById('nmLoadError')) {
-              first.insertAdjacentHTML('beforeend', '<div class="nm-error" id="nmLoadError">号码文件读取失败。请确认 <strong>numbers.json</strong> 或 <strong>numbers(1).json</strong> 与本 HTML 放在同一目录，并通过网站服务器打开，不要直接用本地 file:// 打开。</div>');
+              first.insertAdjacentHTML('beforeend', '<div class="nm-error" id="nmLoadError">号码文件读取失败。请刷新页面后重试；如果问题持续，请联系网站管理员。</div>');
             }
           }
 
@@ -1415,13 +1415,6 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 2400);
     }
-
-    (function initBackTop() {
-      const btn = document.getElementById('backTop');
-      if (!btn) return;
-      window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 360), { passive: true });
-      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    })();
 
     applyTemplateIdentity();
     applyModuleVisibility();
