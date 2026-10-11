@@ -826,6 +826,13 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             alert(message);
           }
 
+          function clearNmCopyStatus() {
+            var status = nmContactModal && nmContactModal.querySelector('#nmCopyStatus');
+            if (!status) return;
+            status.textContent = '';
+            status.classList.remove('is-visible', 'is-error');
+          }
+
           function showNmCopyStatus(message, isError) {
             var status = nmContactModal && nmContactModal.querySelector('#nmCopyStatus');
             if (!status) { showNmToast(message); return; }
@@ -905,6 +912,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           function openNmContact(number) {
             nmContactNumber = String(number || '').trim();
             var modal = ensureNmContactModal();
+            clearNmCopyStatus();
             modal.querySelector('#nmContactNumber').textContent = nmContactNumber;
             modal.hidden = false;
             document.body.classList.add('nm-contact-open');
@@ -913,6 +921,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           }
 
           function closeNmContact() {
+            clearNmCopyStatus();
             if (nmContactModal) nmContactModal.hidden = true;
             document.body.classList.remove('nm-contact-open');
           }
