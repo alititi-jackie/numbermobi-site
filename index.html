@@ -605,6 +605,15 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           .nm-section-head p { font-size:13px; line-height:1.55; color:#64748b; margin:0; }
           .nm-count { flex:0 0 auto; padding:5px 9px; border-radius:999px; background:#eff6ff; color:#2563eb; font-size:12px; font-weight:900; }
           .nm-number-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px; }
+
+          .nm-pagination{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px;padding:0 1px;color:#64748b;font-size:12px}
+          .nm-pagination.bottom{margin:12px 0 0}
+          .nm-pagination-info{white-space:nowrap}
+          .nm-pagination-actions{display:flex;align-items:center;gap:5px}
+          .nm-page-btn{min-height:32px;padding:0 10px;border:1px solid #e2e8f0;border-radius:9px;background:#fff;color:#334155;font-size:12px;font-weight:700;cursor:pointer}
+          .nm-page-btn:disabled{color:#cbd5e1;background:#f8fafc;cursor:default}
+          .nm-page-current{min-width:28px;text-align:center;font-weight:700;color:#334155}
+          .nm-pagination[hidden]{display:none!important}
           .nm-number-card { position:relative; min-height:86px; border:1px solid #e5e7eb; border-radius:14px; background:#f8fafc; padding:12px 8px 10px; text-align:center; cursor:pointer; transition: transform .15s ease, background .15s ease, box-shadow .15s ease; }
           .nm-number-card:active { transform:scale(.97); background:#eff6ff; }
           .nm-number-card:hover { box-shadow:0 6px 18px rgba(37,99,235,.10); }
@@ -678,7 +687,9 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             </div>
             <span class="nm-count" id="tripleCount">读取中</span>
           </div>
+          <div class="nm-pagination" id="triplePaginationTop" hidden></div>
           <div class="nm-number-grid" id="tripleGrid"><div class="nm-loading">正在读取号码...</div></div>
+          <div class="nm-pagination bottom" id="triplePaginationBottom" hidden></div>
         </section>
 
         <section class="nm-section" id="quad">
@@ -689,7 +700,9 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             </div>
             <span class="nm-count" id="quadCount">读取中</span>
           </div>
+          <div class="nm-pagination" id="quadPaginationTop" hidden></div>
           <div class="nm-number-grid" id="quadGrid"><div class="nm-loading">正在读取号码...</div></div>
+          <div class="nm-pagination bottom" id="quadPaginationBottom" hidden></div>
         </section>
 
         <section class="nm-section" id="other">
@@ -700,7 +713,9 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             </div>
             <span class="nm-count" id="otherCount">读取中</span>
           </div>
+          <div class="nm-pagination" id="otherPaginationTop" hidden></div>
           <div class="nm-number-grid" id="otherGrid"><div class="nm-loading">正在读取号码...</div></div>
+          <div class="nm-pagination bottom" id="otherPaginationBottom" hidden></div>
         </section>
 
         <article class="template-card" id="buy-note">
@@ -890,12 +905,74 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             return '请咨询';
           }
 
+          var NM_PAGE_SIZE = 25;
+          var NM_GROUP_PAGES = { triple: 1, quad: 1, other: 1 };
+
+          function renderNmPagination(key, total) {
+            if (key === 'search') return;
+            var pages = Math.ceil(total / NM_PAGE_SIZE);
+            var current = Math.min(Math.max(1, NM_GROUP_PAGES[key] || 1), Math.max(1, pages));
+            NM_GROUP_PAGES[key] = current;
+            ['Top', 'Bottom'].forEach(function(position) {
+              var el = document.getElementById(key + 'Pagination' + position);
+              if (!el) return;
+              el.hidden = total <= NM_PAGE_SIZE;
+              if (el.hidden) { el.textContent = ''; return; }
+              el.textContent = '';
+              var info = document.createElement('span');
+              info.className = 'nm-pagination-info';
+              info.textContent = '第 ' + current + ' / ' + pages + ' 页';
+              var actions = document.createElement('div');
+              actions.className = 'nm-pagination-actions';
+              var prev = document.createElement('button');
+              prev.type = 'button';
+              prev.className = 'nm-page-btn';
+              prev.textContent = '上一页';
+              prev.disabled = current <= 1;
+              prev.setAttribute('aria-label', key + '上一页');
+              prev.addEventListener('click', function() {
+                if (NM_GROUP_PAGES[key] > 1) {
+                  NM_GROUP_PAGES[key]--;
+                  renderNmGroup(key, NM_NUMBER_DATA || {});
+                }
+              });
+              var page = document.createElement('span');
+              page.className = 'nm-page-current';
+              page.textContent = current;
+              page.setAttribute('aria-current', 'page');
+              var next = document.createElement('button');
+              next.type = 'button';
+              next.className = 'nm-page-btn';
+              next.textContent = '下一页';
+              next.disabled = current >= pages;
+              next.setAttribute('aria-label', key + '下一页');
+              next.addEventListener('click', function() {
+                if (NM_GROUP_PAGES[key] < pages) {
+                  NM_GROUP_PAGES[key]++;
+                  renderNmGroup(key, NM_NUMBER_DATA || {});
+                }
+              });
+              actions.appendChild(prev);
+              actions.appendChild(page);
+              actions.appendChild(next);
+              el.appendChild(info);
+              el.appendChild(actions);
+            });
+          }
+
           function renderNmGroup(key, data) {
             var grid = document.getElementById(key + 'Grid');
             var count = document.getElementById(key + 'Count');
             var list = Array.isArray(data && data[key]) ? data[key] : [];
             if (count) count.textContent = list.length + ' 个';
             if (!grid) return;
+            if (key !== 'search') {
+              var pages = Math.max(1, Math.ceil(list.length / NM_PAGE_SIZE));
+              NM_GROUP_PAGES[key] = Math.min(Math.max(1, NM_GROUP_PAGES[key] || 1), pages);
+              renderNmPagination(key, list.length);
+              var start = (NM_GROUP_PAGES[key] - 1) * NM_PAGE_SIZE;
+              list = list.slice(start, start + NM_PAGE_SIZE);
+            }
             if (!list.length) {
               grid.innerHTML = '<div class="nm-loading">暂无号码</div>';
               return;
