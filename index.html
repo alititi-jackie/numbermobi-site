@@ -807,8 +807,30 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             status.classList.add('is-visible');
           }
 
-          function copyNmText(value, successMessage) {
+          var nmContactCloseTimer = null;
+          var nmContactSession = 0;
+
+          function clearNmContactCloseTimer() {
+            if (nmContactCloseTimer) {
+              clearTimeout(nmContactCloseTimer);
+              nmContactCloseTimer = null;
+            }
+          }
+
+          function copyNmText(value, successMessage, closeModalOnSuccess) {
             var text = String(value || '');
+            var session = nmContactSession;
+            function handleCopySuccess() {
+              if (closeModalOnSuccess && (session !== nmContactSession || !nmContactModal || nmContactModal.hidden)) return;
+              showNmCopyStatus(successMessage, false);
+              if (closeModalOnSuccess) {
+                clearNmContactCloseTimer();
+                nmContactCloseTimer = setTimeout(function() {
+                  nmContactCloseTimer = null;
+                  if (session === nmContactSession) closeNmContact();
+                }, 1500);
+              }
+            }
             function fallbackCopy() {
               var field = document.createElement('textarea');
               field.value = text;
@@ -821,13 +843,11 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               var copied = false;
               try { copied = document.execCommand('copy'); } catch (err) { copied = false; }
               field.remove();
-              if (copied) showNmCopyStatus(successMessage, false);
-              else showNmCopyStatus('复制失败，请长按文字手动复制：' + text, true);
+              if (copied) handleCopySuccess();
+              else if (!closeModalOnSuccess || session === nmContactSession) showNmCopyStatus('复制失败，请长按文字手动复制：' + text, true);
             }
             if (navigator.clipboard && window.isSecureContext) {
-              navigator.clipboard.writeText(text).then(function() {
-                showNmCopyStatus(successMessage, false);
-              }).catch(fallbackCopy);
+              navigator.clipboard.writeText(text).then(handleCopySuccess).catch(fallbackCopy);
             } else {
               fallbackCopy();
             }
@@ -864,10 +884,10 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               if (event.target === nmContactModal || event.target.classList.contains('nm-contact-close')) closeNmContact();
             });
             nmContactModal.querySelector('#nmCopyWechatBtn').addEventListener('click', function() {
-              copyNmText('hola24', '微信号已复制：hola24');
+              copyNmText('hola24', '微信号已复制：hola24', true);
             });
             nmContactModal.querySelector('#nmCopyNumberBtn').addEventListener('click', function() {
-              copyNmText(nmContactNumber, '手机号已复制：' + nmContactNumber);
+              copyNmText(nmContactNumber, '手机号已复制：' + nmContactNumber, true);
             });
             document.addEventListener('keydown', function(event) {
               if (event.key === 'Escape' && nmContactModal && !nmContactModal.hidden) closeNmContact();
@@ -876,6 +896,8 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           }
 
           function openNmContact(number) {
+            clearNmContactCloseTimer();
+            nmContactSession++;
             nmContactNumber = String(number || '').trim();
             var modal = ensureNmContactModal();
             clearNmCopyStatus();
@@ -887,6 +909,8 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           }
 
           function closeNmContact() {
+            clearNmContactCloseTimer();
+            nmContactSession++;
             clearNmCopyStatus();
             if (nmContactModal) nmContactModal.hidden = true;
             document.body.classList.remove('nm-contact-open');
