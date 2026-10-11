@@ -820,13 +820,38 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               grid.innerHTML = '<div class="nm-loading">暂无号码</div>';
               return;
             }
-            grid.innerHTML = list.map(function(item) {
+            grid.textContent = '';
+            list.forEach(function(item) {
               var formatted = formatNmNumber(item.number);
-              var soldClass = item.sold ? ' is-sold' : '';
-              var badge = item.sold ? '<span class="nm-badge sold">已售</span>' : (item.hot ? '<span class="nm-badge">热卖</span>' : '');
-              var click = item.sold ? "showNmToast('此号码已售出')" : "openNmContact('" + formatted.replace(/'/g, "\\'") + "')";
-              return '<button class="nm-number-card' + soldClass + '" type="button" onclick="' + click + '" aria-label="' + formatted + '">' + badge + '<span class="nm-number">' + formatted + '</span><span class="nm-price">' + nmPriceText(item) + '</span></button>';
-            }).join('');
+              var btn = document.createElement('button');
+              btn.className = 'nm-number-card' + (item.sold ? ' is-sold' : '');
+              btn.type = 'button';
+              btn.setAttribute('aria-label', formatted);
+              if (item.sold) {
+                var badgeSold = document.createElement('span');
+                badgeSold.className = 'nm-badge sold';
+                badgeSold.textContent = '已售';
+                btn.appendChild(badgeSold);
+              } else if (item.hot) {
+                var badgeHot = document.createElement('span');
+                badgeHot.className = 'nm-badge';
+                badgeHot.textContent = '热卖';
+                btn.appendChild(badgeHot);
+              }
+              var numSpan = document.createElement('span');
+              numSpan.className = 'nm-number';
+              numSpan.textContent = formatted;
+              btn.appendChild(numSpan);
+              var priceSpan = document.createElement('span');
+              priceSpan.className = 'nm-price';
+              priceSpan.textContent = nmPriceText(item);
+              btn.appendChild(priceSpan);
+              btn.addEventListener('click', function() {
+                if (item.sold) { showNmToast('此号码已售出'); }
+                else { openNmContact(formatted); }
+              });
+              grid.appendChild(btn);
+            });
           }
 
           function showNmLoadError() {
