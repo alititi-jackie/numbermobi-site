@@ -649,6 +649,11 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           .nm-note-list { margin:8px 0 0; padding-left:18px; color:#52525b; font-size:14px; line-height:1.75; }
           .nm-fixed-contact { display:grid; gap:8px; margin-top:10px; }
           .nm-fixed-contact a, .nm-fixed-contact button { width:100%; border:1px solid #dbeafe; border-radius:14px; background:#eff6ff; color:#2563eb; padding:11px 12px; font-size:14px; font-weight:900; text-align:center; cursor:pointer; }
+          .nm-footer { margin-top:28px; padding:24px 16px; border-top:1px solid #dbe3ee; background:#fff; color:#64748b; text-align:center; font-size:13px; }
+          .nm-footer nav { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin:8px 0; }
+          .nm-footer nav a { color:#475569; text-decoration:none; }
+          .nm-footer nav a:hover { color:#2563eb; }
+          .nm-footer p { margin:12px 0 0; }
           @media (max-width: 380px) {
             .nm-kicker { font-size:14px; padding:7px 10px; }
             .nm-hero h1 { font-size:22px; }
@@ -748,6 +753,21 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             <button type="button" onclick="copyNmWechat()">💬 复制微信：hola24</button>
           </div>
         </article>
+
+        <footer class="nm-footer">
+          <nav aria-label="选号指南">
+            <a href="/guides/">选号指南</a>
+            <a href="/guides/212-phone-number/">212 靓号</a>
+            <a href="/guides/new-york-phone-number/">纽约靓号</a>
+            <a href="/guides/us-phone-number-price/">靓号价格说明</a>
+            <a href="/guides/transfer-phone-number/">号码转入指南</a>
+          </nav>
+          <nav aria-label="OpenAA 生态">
+            <a href="https://openaa.com/" target="_blank" rel="noopener">OpenAA</a>
+            <a href="https://go.openaa.com/" target="_blank" rel="noopener">Go 导航</a>
+          </nav>
+          <p>© 2026 NumberMobi · 美国手机靓号</p>
+        </footer>
 
         <script>
           var NM_NUMBER_FILE_CANDIDATES = ['numbers.json', './numbers.json', 'numbers(1).json', './numbers(1).json'];
