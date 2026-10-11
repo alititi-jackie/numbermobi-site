@@ -627,6 +627,12 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           .nm-kicker { display:inline-flex; align-items:center; gap:20px; padding:7px 12px; border-radius:999px; background:#dbeafe; color:#1d4ed8; font-size:15px; line-height:1.2; font-weight:900; margin-bottom:10px; max-width:100%; white-space:normal; }
           .nm-hero h1 { font-size:22px; line-height:1.25; margin:0 0 8px; color:#111827; letter-spacing:-.4px; }
           .nm-hero p { font-size:15px; color:#475569; line-height:1.68; margin:0; }
+          .nm-hero-contact-cta { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:42px; margin-top:14px; padding:0 18px; border:1px solid #2563eb; border-radius:11px; background:#2563eb; color:#fff; font-size:14px; font-weight:800; text-decoration:none; box-shadow:0 3px 8px rgba(37,99,235,.16); -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+          .nm-hero-contact-cta:hover { background:#1d4ed8; border-color:#1d4ed8; }
+          .nm-hero-contact-cta:focus-visible { outline:3px solid rgba(37,99,235,.3); outline-offset:3px; }
+          #contact { scroll-margin-top:120px; }
+          html { scroll-behavior:smooth; }
+          @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
           .nm-contact-row { display:grid; grid-template-columns:1fr; gap:8px; margin-top:12px; }
           .nm-contact-link { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:44px; padding:10px 12px; border-radius:14px; background:#fff; border:1px solid #e5e7eb; color:#2563eb; font-weight:800; font-size:14px; }
           .nm-contact-link span { color:#64748b; font-weight:600; font-size:12px; }
@@ -689,7 +695,8 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
 
         <article class="template-card nm-hero" id="top">
           <h1>美国手机靓号网 出售：三连号、四连号、精品好记号码</h1>
-          <p>现只展示少量纽约 917、347、646、929 等常用区号，和其它好记号码。如你想了解更多靓号或者其它地区靓号，请微信或电话咨询。</p>
+          <p>现只展示少量纽约 917、347、646、929 等常用区号，和其它好记号码。如你想了解更多靓号或者其它地区靓号，欢迎联系咨询。</p>
+          <a class="nm-hero-contact-cta" href="#contact">联系咨询 <span aria-hidden="true">↓</span></a>
         </article>
 
         <nav class="nm-category-wrap" aria-label="号码分类导航">
