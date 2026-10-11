@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://numbermobi.com/sitemap.xml
