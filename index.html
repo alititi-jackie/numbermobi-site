@@ -661,7 +661,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               <a class="nm-cat-chip" href="#triple">纽约三连号</a>
               <a class="nm-cat-chip" href="#quad">四连号</a>
               <a class="nm-cat-chip" href="#other">精品好记号</a>
-              <a class="nm-cat-chip" href="#buy-note">购买说明</a>
+              <a class="nm-cat-chip" href="/purchase-guide/">购买说明</a>
               <a class="nm-cat-chip" href="#contact">联系方式</a>
             </div>
             <button class="nm-arrow" type="button" aria-label="向右滑动分类" onclick="scrollNmCats(1)">›</button>
@@ -781,7 +781,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
                 if (entry.isIntersecting) setNmActive('#' + entry.target.id);
               });
             }, { root: null, rootMargin: '-120px 0px -65% 0px', threshold: 0.01 });
-            ['top', 'triple', 'quad', 'other', 'buy-note', 'contact'].forEach(function(id) {
+            ['top', 'triple', 'quad', 'other', 'contact'].forEach(function(id) {
               var node = document.getElementById(id);
               if (node) nmObserver.observe(node);
             });
