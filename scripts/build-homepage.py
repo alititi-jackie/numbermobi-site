@@ -28,6 +28,15 @@ if guide_marker not in text:
             <a class="mini-card" href="/guides/us-phone-number-price/"><strong>美国靓号多少钱？</strong><span>号码费用与手机套餐费用区别</span></a>
             <a class="mini-card" href="/guides/new-york-phone-number/"><strong>纽约区号怎么选？</strong><span>917、718、347、646、929 指南</span></a>
             <a class="mini-card" href="/guides/triple-quad-number/"><strong>三连号、四连号</strong><span>重复尾号与好记号码怎么选</span></a>
+            <a class="mini-card" href="/guides/california-phone-number/"><strong>加州靓号怎么选？</strong><span>洛杉矶、旧金山热门区号指南</span></a>
+            <a class="mini-card" href="/guides/texas-phone-number/"><strong>得克萨斯靓号怎么选？</strong><span>休斯敦、达拉斯热门区号指南</span></a>
+            <a class="mini-card" href="/guides/florida-phone-number/"><strong>佛罗里达靓号怎么选？</strong><span>迈阿密、奥兰多热门区号指南</span></a>
+            <a class="mini-card" href="/guides/washington-phone-number/"><strong>华盛顿州靓号怎么选？</strong><span>西雅图、斯波坎热门区号指南</span></a>
+            <a class="mini-card" href="/guides/new-jersey-phone-number/"><strong>新泽西靓号怎么选？</strong><span>纽瓦克、泽西城热门区号指南</span></a>
+            <a class="mini-card" href="/guides/massachusetts-phone-number/"><strong>麻萨诸塞州靓号怎么选？</strong><span>波士顿热门区号指南</span></a>
+            <a class="mini-card" href="/guides/illinois-phone-number/"><strong>伊利诺伊靓号怎么选？</strong><span>芝加哥热门区号指南</span></a>
+            <a class="mini-card" href="/guides/hawaii-phone-number/"><strong>夏威夷靓号怎么选？</strong><span>檀香山 808 区号指南</span></a>
+            <a class="mini-card" href="/guides/georgia-phone-number/"><strong>佐治亚靓号怎么选？</strong><span>亚特兰大、萨凡纳热门区号指南</span></a>
           </div>
           <p style="margin-top:12px"><a href="/guides/" style="color:#2563eb;font-weight:800">查看全部选号指南 →</a></p>
         </article>
