@@ -2,12 +2,12 @@
   "triple": [
 
 
-    { "number": "9174856111", "price": 40 },
-{ "number": "9174516111", "price": 40 },
-{ "number": "9174517111", "price": 40 },
-{ "number": "9177655222", "price": 40 },
-{ "number": "9179856222", "price": 40, "hot": true },
-{ "number": "9179704333", "price": 40 },
+    { "number": "9174856111", "price": 40, "sold": true },
+{ "number": "9174516111", "price": 40, "sold": true },
+{ "number": "9174517111", "price": 40, "sold": true },
+{ "number": "9177655222", "price": 40, "sold": true },
+{ "number": "9179856222", "price": 40, "hot": true, "sold": true },
+{ "number": "9179704333", "price": 40, "sold": true },
 { "number": "9172684333", "price": 40, "sold": true },
 { "number": "9179704555", "price": 40, "sold": true },
 { "number": "9177914666", "price": 40, "sold": true },
