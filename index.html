@@ -614,6 +614,11 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           .nm-page-btn:disabled{color:#cbd5e1;background:#f8fafc;cursor:default}
           .nm-page-current{min-width:28px;text-align:center;font-weight:700;color:#334155}
           .nm-pagination[hidden]{display:none!important}
+          .nm-nav-card{background:linear-gradient(135deg,#2563eb,#1d4ed8);border-color:#1d4ed8;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+          .nm-nav-card:hover{box-shadow:0 6px 18px rgba(37,99,235,.35)}
+          .nm-nav-card:active{transform:scale(.97)}
+          .nm-nav-label{display:block;font-size:19px;line-height:1.25;font-weight:900;letter-spacing:1px;color:#fff}
+          .nm-nav-sub{display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,.85)}
           .nm-number-card { position:relative; min-height:86px; border:1px solid #e5e7eb; border-radius:14px; background:#f8fafc; padding:12px 8px 10px; text-align:center; cursor:pointer; transition: transform .15s ease, background .15s ease, box-shadow .15s ease; }
           .nm-number-card:active { transform:scale(.97); background:#eff6ff; }
           .nm-number-card:hover { box-shadow:0 6px 18px rgba(37,99,235,.10); }
@@ -933,9 +938,56 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           var NM_PAGE_SIZE = 30;
           var NM_GROUP_PAGES = { triple: 1, quad: 1, other: 1 };
 
+          function nmPageLayout(total) {
+            var layout = [];
+            if (total <= NM_PAGE_SIZE) {
+              layout.push({ start: 0, count: total, hasPrev: false, hasNext: false });
+              return layout;
+            }
+            var i = 0;
+            var first = true;
+            while (i < total) {
+              var remaining = total - i;
+              if (first) {
+                layout.push({ start: i, count: NM_PAGE_SIZE - 1, hasPrev: false, hasNext: true });
+                i += NM_PAGE_SIZE - 1;
+                first = false;
+              } else if (remaining <= NM_PAGE_SIZE - 1) {
+                layout.push({ start: i, count: remaining, hasPrev: true, hasNext: false });
+                i = total;
+              } else {
+                layout.push({ start: i, count: NM_PAGE_SIZE - 2, hasPrev: true, hasNext: true });
+                i += NM_PAGE_SIZE - 2;
+              }
+            }
+            return layout;
+          }
+
+          function nmNavButton(key, dir, label, targetPage, pages) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'nm-number-card nm-nav-card';
+            btn.setAttribute('aria-label', label);
+            var main = document.createElement('span');
+            main.className = 'nm-nav-label';
+            main.textContent = (dir < 0 ? '\u2039 ' : '') + label + (dir > 0 ? ' \u203a' : '');
+            btn.appendChild(main);
+            var sub = document.createElement('span');
+            sub.className = 'nm-nav-sub';
+            sub.textContent = '\u7b2c ' + targetPage + ' / ' + pages + ' \u9875';
+            btn.appendChild(sub);
+            btn.addEventListener('click', function() {
+              if (targetPage >= 1 && targetPage <= pages) {
+                NM_GROUP_PAGES[key] = targetPage;
+                renderNmGroup(key, NM_NUMBER_DATA || {});
+              }
+            });
+            return btn;
+          }
+
           function renderNmPagination(key, total) {
             if (key === 'search') return;
-            var pages = Math.ceil(total / NM_PAGE_SIZE);
+            var pages = nmPageLayout(total).length;
             var current = Math.min(Math.max(1, NM_GROUP_PAGES[key] || 1), Math.max(1, pages));
             NM_GROUP_PAGES[key] = current;
             ['Top', 'Bottom'].forEach(function(position) {
@@ -991,18 +1043,25 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             var list = Array.isArray(data && data[key]) ? data[key] : [];
             if (count) count.textContent = list.length + ' 个';
             if (!grid) return;
+            var nmLayout = null;
+            var nmPages = 1;
             if (key !== 'search') {
-              var pages = Math.max(1, Math.ceil(list.length / NM_PAGE_SIZE));
-              NM_GROUP_PAGES[key] = Math.min(Math.max(1, NM_GROUP_PAGES[key] || 1), pages);
+              nmLayout = nmPageLayout(list.length);
+              nmPages = nmLayout.length;
+              NM_GROUP_PAGES[key] = Math.min(Math.max(1, NM_GROUP_PAGES[key] || 1), nmPages);
               renderNmPagination(key, list.length);
-              var start = (NM_GROUP_PAGES[key] - 1) * NM_PAGE_SIZE;
-              list = list.slice(start, start + NM_PAGE_SIZE);
+              var nmPage = nmLayout[NM_GROUP_PAGES[key] - 1];
+              list = list.slice(nmPage.start, nmPage.start + nmPage.count);
             }
             if (!list.length) {
               grid.innerHTML = '<div class="nm-loading">暂无号码</div>';
               return;
             }
             grid.textContent = '';
+            if (nmLayout) {
+              var nmCurrent = nmLayout[NM_GROUP_PAGES[key] - 1];
+              if (nmCurrent.hasPrev) grid.appendChild(nmNavButton(key, -1, '\u4e0a\u4e00\u9875', NM_GROUP_PAGES[key] - 1, nmPages));
+            }
             list.forEach(function(item) {
               var formatted = formatNmNumber(item.number);
               var btn = document.createElement('button');
@@ -1034,6 +1093,10 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               });
               grid.appendChild(btn);
             });
+            if (nmLayout) {
+              var nmCurrent2 = nmLayout[NM_GROUP_PAGES[key] - 1];
+              if (nmCurrent2.hasNext) grid.appendChild(nmNavButton(key, 1, '\u4e0b\u4e00\u9875', NM_GROUP_PAGES[key] + 1, nmPages));
+            }
           }
 
           function showNmLoadError() {
