@@ -991,9 +991,9 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
 
           function nmScrollToGroup(key) {
             var sec = document.getElementById(key);
-            if (sec && sec.scrollIntoView) {
-              sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            if (!sec) return;
+            var top = sec.getBoundingClientRect().top + window.pageYOffset - 180;
+            window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
           }
 
           function renderNmPagination(key, total) {
