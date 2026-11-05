@@ -666,6 +666,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               <a class="nm-cat-chip" href="#triple">纽约三连号</a>
               <a class="nm-cat-chip" href="#quad">四连号</a>
               <a class="nm-cat-chip" href="#other">精品好记号</a>
+              <!-- nm-nav-anchor -->
               <a class="nm-cat-chip" href="#contact">联系方式</a>
               <a class="nm-cat-chip" href="/purchase-notice/">购买须知</a>
               <a class="nm-cat-chip" href="/guides/">选号指南</a>
@@ -865,6 +866,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
 
           var nmContactModal = null;
           var nmContactNumber = '';
+          var nmContactReturnFocus = null;
           function ensureNmContactModal() {
             if (nmContactModal) return nmContactModal;
             nmContactModal = document.createElement('div');
@@ -896,12 +898,22 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               copyNmText(nmContactNumber, '手机号已复制：' + nmContactNumber, true);
             });
             document.addEventListener('keydown', function(event) {
-              if (event.key === 'Escape' && nmContactModal && !nmContactModal.hidden) closeNmContact();
+              if (!nmContactModal || nmContactModal.hidden) return;
+              if (event.key === 'Escape') { closeNmContact(); return; }
+              if (event.key !== 'Tab') return;
+              var focusables = nmContactModal.querySelectorAll('a[href], button:not([disabled])');
+              if (!focusables.length) return;
+              var first = focusables[0];
+              var last = focusables[focusables.length - 1];
+              if (!nmContactModal.contains(document.activeElement)) { event.preventDefault(); first.focus(); }
+              else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+              else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
             });
             return nmContactModal;
           }
 
-          function openNmContact(number) {
+          function openNmContact(number, triggerEl) {
+            nmContactReturnFocus = triggerEl || document.activeElement || null;
             clearNmContactCloseTimer();
             nmContactSession++;
             nmContactNumber = String(number || '').trim();
@@ -920,6 +932,8 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             clearNmCopyStatus();
             if (nmContactModal) nmContactModal.hidden = true;
             document.body.classList.remove('nm-contact-open');
+            if (nmContactReturnFocus && document.contains(nmContactReturnFocus)) nmContactReturnFocus.focus();
+            nmContactReturnFocus = null;
           }
 
           function formatNmNumber(raw) {
@@ -1102,7 +1116,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               btn.appendChild(priceSpan);
               btn.addEventListener('click', function() {
                 if (item.sold) { showNmToast('此号码已售出'); }
-                else { openNmContact(formatted); }
+                else { openNmContact(formatted, btn); }
               });
               grid.appendChild(btn);
             });
@@ -1132,6 +1146,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             var count = document.getElementById('nmSearchCount');
             var query = String(value == null ? (input ? input.value : '') : value).trim().toLowerCase();
             var digits = query.replace(/\D/g, '');
+            if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
             var sections = ['triple', 'quad', 'other'];
             if (!query) {
               if (results) { results.hidden = true; results.classList.remove('nm-search-results-active'); }
@@ -1140,7 +1155,13 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             }
             sections.forEach(function(key) { var el = document.getElementById(key); if (el) el.hidden = true; });
             if (results) { results.hidden = false; results.classList.add('nm-search-results-active'); }
-            var data = NM_NUMBER_DATA || {};
+            if (!NM_NUMBER_DATA) {
+              if (count) count.textContent = '号码加载中…';
+              var loadingGrid = document.getElementById('searchGrid');
+              if (loadingGrid) loadingGrid.innerHTML = '<div class="nm-loading">号码正在加载，请稍候…</div>';
+              return;
+            }
+            var data = NM_NUMBER_DATA;
             var all = [];
             ['triple', 'quad', 'other'].forEach(function(group) {
               (Array.isArray(data[group]) ? data[group] : []).forEach(function(item) {
@@ -1185,7 +1206,10 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
                 renderNmGroup('quad', data);
                 renderNmGroup('other', data);
                 var initialQuery = new URLSearchParams(location.search).get('q') || '';
-                if (nmSearchInput && initialQuery) { nmSearchInput.value = initialQuery; runNmSearch(initialQuery); }
+                if (nmSearchInput) {
+                  if (initialQuery && !nmSearchInput.value) nmSearchInput.value = initialQuery;
+                  if (nmSearchInput.value) runNmSearch(nmSearchInput.value);
+                }
                 if (location.hash) { var nmHt = document.getElementById(location.hash.slice(1)); if (nmHt) nmHt.scrollIntoView(); }
                 return;
               } catch (err) { lastError = err; }

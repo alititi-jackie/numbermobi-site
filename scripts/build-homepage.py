@@ -1,17 +1,30 @@
 from pathlib import Path
 import re
+import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 
 text = INDEX.read_text(encoding="utf-8")
 
+# 0) Validate numbers.json first; bad inventory must never reach the live site.
+_validate = subprocess.run(
+    [sys.executable, str(ROOT / "scripts" / "validate-numbers.py")],
+    capture_output=True, text=True,
+)
+if _validate.returncode != 0:
+    sys.stdout.write(_validate.stdout)
+    sys.stderr.write(_validate.stderr)
+    raise SystemExit("numbers.json validation failed; homepage build aborted")
+print(_validate.stdout.strip())
+
 # 1) Add a visible SEO guides entry to the existing sticky category navigation.
-nav_anchor = '              <a class="nm-cat-chip" href="#other">精品好记号</a>\n'
+nav_anchor = '              <!-- nm-nav-anchor -->\n'
 nav_guides = '              <a class="nm-cat-chip" href="/guides/">选号指南</a>\n'
 if nav_guides not in text:
     if nav_anchor not in text:
-        raise SystemExit("Could not find NumberMobi category navigation anchor")
+        raise SystemExit("Could not find NumberMobi navigation marker (nm-nav-anchor)")
     text = text.replace(nav_anchor, nav_anchor + nav_guides, 1)
 
 # 2) Add a compact guide hub on the homepage, at the bottom (after contact, before footer).
