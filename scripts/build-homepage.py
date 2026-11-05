@@ -82,6 +82,7 @@ modal_notice = '''              '<p class="nm-contact-desc">查询号码是否�
               '<div class="nm-purchase-notice" id="nmPurchaseNotice">' +
                 '<h3>购买须知</h3>' +
                 '<p><strong>号码与套餐：</strong>本站仅出售号码，不包含手机套餐。购买成功后提供转网所需账号及密码，需自行办理转网。</p>' +
+                '<p><strong>付款方式：</strong>支持微信、Zelle 等常见付款方式。</p>' +
                 '<p><strong>转网与退换：</strong>本站号码均为虚拟网络运营商号码，不保证所有号码均可转入指定运营商。号码售出后，概不退换。若指定运营商无法接收，建议更换为支持转入的运营商；具体规则以适用法律为准。</p>' +
                 '<p><strong>转出期限：</strong>请尽量在购买后 20 天内完成转出。</p>' +
                 '<p><strong>逾期托管：</strong>超过 20 天仍未转出的号码，按每月 $4 收取托管费用。具体计费规则请在购买前确认。</p>' +
