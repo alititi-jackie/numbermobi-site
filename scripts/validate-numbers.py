@@ -11,9 +11,9 @@ Checks:
 - top level is an object with triple / quad / other lists
 - every item has a 10-digit number and a positive price
 - no duplicate numbers across all groups
-- group definitions: triple = last 3 digits identical, quad = last 4
-  identical, other (premium) = ends in 8888; in all groups the last 7
-  digits must not contain the digit 4
+- deliberately NO content rules: what belongs in each group is the
+  owner's choice. Number patterns (no digit 4, repeated endings, 8888
+  tails) are sourcing criteria for imports, not publish gates.
 """
 import json
 import sys
@@ -61,14 +61,6 @@ def main():
             price = item.get("price")
             if isinstance(price, bool) or not isinstance(price, (int, float)) or price <= 0:
                 errors.append(f"{where}: price missing or not a positive number")
-            if "4" in d[3:]:
-                errors.append(f"{where}: last 7 digits contain 4")
-            if group == "triple" and not (d[-1] == d[-2] == d[-3]):
-                errors.append(f"{where}: triple must end in 3 identical digits")
-            if group == "quad" and not (d[-1] == d[-2] == d[-3] == d[-4]):
-                errors.append(f"{where}: quad must end in 4 identical digits")
-            if group == "other" and not d.endswith("8888"):
-                errors.append(f"{where}: premium must end in 8888")
 
     for err in errors:
         print("ERROR:", err)
