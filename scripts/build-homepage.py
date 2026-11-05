@@ -14,12 +14,12 @@ if nav_guides not in text:
         raise SystemExit("Could not find NumberMobi category navigation anchor")
     text = text.replace(nav_anchor, nav_anchor + nav_guides, 1)
 
-# 2) Add a compact guide hub on the homepage, before the inventory notice.
+# 2) Add a compact guide hub on the homepage, at the bottom (after contact, before footer).
 guide_marker = '<article class="template-card nm-guide-home" id="guides">'
 if guide_marker not in text:
-    buy_anchor = '        <article class="template-card" id="buy-note">\n'
+    buy_anchor = '        <footer class="nm-footer">\n'
     if buy_anchor not in text:
-        raise SystemExit("Could not find inventory-note insertion point")
+        raise SystemExit("Could not find footer insertion point")
     guide_block = '''        <article class="template-card nm-guide-home" id="guides">
           <h2>选号指南</h2>
           <p>第一次买美国手机靓号？这里整理了价格、纽约区号、三连号/四连号、转入套餐和购买注意事项。</p>
