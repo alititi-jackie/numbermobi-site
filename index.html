@@ -626,6 +626,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           .nm-price { display:block; margin-top:5px; font-size:13px; font-weight:800; color:#0f766e; }
           .nm-badge { position:absolute; top:6px; right:6px; padding:2px 6px; border-radius:999px; background:#ef4444; color:#fff; font-size:11px; font-weight:900; }
           .nm-badge.sold { background:#64748b; }
+          .nm-badge.region { left:6px; right:auto; background:#e8edf3; color:#526075; font-weight:700; letter-spacing:.2px; }
           .nm-number-card.is-sold { opacity:.58; }
           .nm-number-card.is-sold .nm-number, .nm-number-card.is-sold .nm-price { color:#64748b; }
           .nm-loading { padding:18px 8px; color:#64748b; text-align:center; font-size:14px; grid-column:1 / -1; }
@@ -1050,6 +1051,10 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             });
           }
 
+          var NM_REGION_LABEL = {'631':'\u7ebd\u7ea6 Long Island','934':'\u7ebd\u7ea6 Long Island','845':'\u7ebd\u7ea6 Hudson Valley','716':'\u7ebd\u7ea6 Buffalo','914':'\u7ebd\u7ea6 Westchester','315':'\u7ebd\u7ea6 Syracuse','412':'Pittsburgh, PA','614':'Columbus, OH','567':'Toledo, OH','502':'Louisville, KY','517':'Lansing, MI','574':'South Bend, IN','904':'Jacksonville, FL','971':'Portland, OR','864':'Greenville, SC','769':'Jackson, MS','409':'Texas','430':'Texas','806':'Texas','240':'Maryland','252':'North Carolina','475':'Connecticut','575':'New Mexico','765':'Indiana','774':'Massachusetts','785':'Kansas'};
+          var NM_REGION_ALIAS = {'716':'buffalo \u5e03\u6cd5\u7f57 \u7ebd\u7ea6 new york','914':'westchester \u5a01\u5f7b\u65af\u7279 \u7ebd\u7ea6 new york','631':'long island \u957f\u5c9b \u7ebd\u7ea6 new york','934':'long island \u957f\u5c9b \u7ebd\u7ea6 new york','845':'hudson valley \u54c8\u5fb7\u900a\u8c37 \u7ebd\u7ea6 new york','315':'syracuse \u9521\u62c9\u4e18\u5179 \u96ea\u57ce \u7ebd\u7ea6 new york','412':'pittsburgh \u5339\u5179\u5821 pennsylvania \u5bbe\u5dde','614':'columbus \u54e5\u4f26\u5e03 ohio \u4fc4\u4ea5\u4fc4','567':'toledo \u6258\u83b1\u591a ohio \u4fc4\u4ea5\u4fc4','502':'louisville \u8def\u6613\u65af\u7ef4\u5c14 kentucky \u80af\u5854\u57fa','517':'lansing \u5170\u8f9b michigan \u5bc6\u6b47\u6839','574':'south bend \u5357\u672c\u5fb7 indiana \u5370\u7b2c\u5b89\u7eb3','904':'jacksonville \u6770\u514b\u900a\u7ef4\u5c14 florida \u4f5b\u7f57\u91cc\u8fbe \u4f5b\u5dde','971':'portland \u6ce2\u7279\u5170 oregon \u4fc4\u52d2\u5188','864':'greenville \u683c\u6797\u7ef4\u5c14 south carolina \u5357\u5361\u7f57\u83b1\u7eb3 \u5357\u5361','769':'jackson \u6770\u514b\u900a mississippi \u5bc6\u897f\u897f\u6bd4','409':'texas \u5fb7\u5dde \u5fb7\u514b\u8428\u65af','430':'texas \u5fb7\u5dde \u5fb7\u514b\u8428\u65af','806':'texas \u5fb7\u5dde \u5fb7\u514b\u8428\u65af','240':'maryland \u9a6c\u91cc\u5170','252':'north carolina \u5317\u5361\u7f57\u83b1\u7eb3 \u5317\u5361','475':'connecticut \u5eb7\u6d85\u72c4\u683c','575':'new mexico \u65b0\u58a8\u897f\u54e5','765':'indiana \u5370\u7b2c\u5b89\u7eb3','774':'massachusetts \u9a6c\u8428\u8bf8\u585e \u9ebb\u7701','785':'kansas \u582a\u8428\u65af'};
+          function nmRegionLabel(item) { return NM_REGION_LABEL[String(item.number || '').slice(0, 3)] || ''; }
+          function nmRegionSearchText(item) { var ac = String(item.number || '').slice(0, 3); return ((NM_REGION_LABEL[ac] || '') + ' ' + (NM_REGION_ALIAS[ac] || '')).toLowerCase(); }
           function renderNmGroup(key, data) {
             var grid = document.getElementById(key + 'Grid');
             var count = document.getElementById(key + 'Count');
@@ -1091,6 +1096,14 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
                 badgeHot.className = 'nm-badge';
                 badgeHot.textContent = '热卖';
                 btn.appendChild(badgeHot);
+              }
+              var nmRegion = '';
+              if (key === 'other' || (key === 'search' && item._nmGroup === 'other')) nmRegion = nmRegionLabel(item);
+              if (nmRegion) {
+                var badgeRegion = document.createElement('span');
+                badgeRegion.className = 'nm-badge region';
+                badgeRegion.textContent = nmRegion;
+                btn.appendChild(badgeRegion);
               }
               var numSpan = document.createElement('span');
               numSpan.className = 'nm-number';
@@ -1151,7 +1164,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               var number = String(item.number || '').replace(/\D/g, '');
               var group = item._nmGroup;
               var groupText = group === 'triple' ? '三连号 三连' : group === 'quad' ? '四连号 四连' : '精品 好记号 其它';
-              var searchable = [String(item.number || ''), number, groupText, item.sold ? '已售 已售出' : '', item.hot ? '热卖 热门' : '', item.price != null ? String(item.price) : ''].join(' ').toLowerCase();
+              var searchable = [String(item.number || ''), number, groupText, item.sold ? '已售 已售出' : '', item.hot ? '热卖 热门' : '', item.price != null ? String(item.price) : '', group === 'other' ? nmRegionSearchText(item) : ''].join(' ').toLowerCase();
               if (digits && number.indexOf(digits) >= 0) return true;
               if (query.indexOf('三连') >= 0 && group === 'triple') return true;
               if (query.indexOf('四连') >= 0 && group === 'quad') return true;
