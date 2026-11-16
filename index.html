@@ -626,6 +626,11 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           .nm-price { display:block; margin-top:5px; font-size:13px; font-weight:800; color:#0f766e; }
           .nm-badge { position:absolute; top:6px; right:6px; padding:2px 6px; border-radius:999px; background:#ef4444; color:#fff; font-size:11px; font-weight:900; }
           .nm-badge.sold { background:#64748b; }
+          .nm-badge.drop { background:#dc2626; }
+          .nm-badge.fresh { background:#059669; }
+          .nm-was { display:block; margin-top:4px; font-size:11px; font-weight:700; color:#94a3b8; text-decoration:line-through; }
+          .nm-number-card.is-drop .nm-price { color:#dc2626; }
+          .nm-section.nm-fresh { background:#fffbeb; border-color:#fde68a; }
           .nm-number-card.is-sold { opacity:.58; }
           .nm-number-card.is-sold .nm-number, .nm-number-card.is-sold .nm-price { color:#64748b; }
           .nm-loading { padding:18px 8px; color:#64748b; text-align:center; font-size:14px; grid-column:1 / -1; }
@@ -684,6 +689,17 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
         <section class="nm-section nm-search-results" id="nmSearchResults" hidden aria-live="polite">
           <div class="nm-search-count" id="nmSearchCount"></div>
           <div class="nm-number-grid" id="searchGrid"></div>
+        </section>
+
+        <section class="nm-section nm-fresh" id="fresh" hidden>
+          <div class="nm-section-head">
+            <div>
+              <h2>✨ 新号 · 降价好号</h2>
+              <p>最新上架和刚降价的号码，数量有限，先到先得。</p>
+            </div>
+            <span class="nm-count" id="freshCount"></span>
+          </div>
+          <div class="nm-number-grid" id="freshGrid"></div>
         </section>
 
         <section class="nm-section" id="triple">
@@ -1064,10 +1080,114 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             });
           }
 
+          var NM_FRESH_NEW_LIMIT = 12;
+          var NM_FRESH_SET = {};
+          var NM_FRESH_LIST = [];
+
+          function nmIsDrop(item) {
+            return !!(item && !item.sold && item.was != null && Number(item.was) > Number(item.price));
+          }
+
+          function nmComputeFresh(data) {
+            var drops = [];
+            var news = [];
+            ['triple', 'quad', 'other'].forEach(function(group, gi) {
+              (Array.isArray(data && data[group]) ? data[group] : []).forEach(function(item, idx) {
+                var rec = { item: item, gi: gi, idx: idx };
+                if (nmIsDrop(item)) drops.push(rec);
+                else if (!item.sold && item.added) news.push(rec);
+              });
+            });
+            drops.sort(function(a, b) {
+              var d = (Number(b.item.was) - Number(b.item.price)) - (Number(a.item.was) - Number(a.item.price));
+              return d || (a.gi - b.gi) || (a.idx - b.idx);
+            });
+            news.sort(function(a, b) {
+              var d = String(b.item.added).localeCompare(String(a.item.added));
+              return d || (a.gi - b.gi) || (a.idx - b.idx);
+            });
+            news = news.slice(0, NM_FRESH_NEW_LIMIT);
+            NM_FRESH_SET = {};
+            NM_FRESH_LIST = [];
+            drops.forEach(function(rec) {
+              NM_FRESH_SET[String(rec.item.number)] = true;
+              NM_FRESH_LIST.push(rec.item);
+            });
+            news.forEach(function(rec) {
+              NM_FRESH_SET[String(rec.item.number)] = true;
+              rec.item._nmFreshNew = true;
+              NM_FRESH_LIST.push(rec.item);
+            });
+          }
+
+          function nmBuildCard(item) {
+            var formatted = formatNmNumber(item.number);
+            var isDrop = nmIsDrop(item);
+            var btn = document.createElement('button');
+            btn.className = 'nm-number-card' + (item.sold ? ' is-sold' : '') + (isDrop ? ' is-drop' : '');
+            btn.type = 'button';
+            btn.setAttribute('aria-label', formatted);
+            if (item.sold) {
+              var badgeSold = document.createElement('span');
+              badgeSold.className = 'nm-badge sold';
+              badgeSold.textContent = '已售';
+              btn.appendChild(badgeSold);
+            } else if (isDrop) {
+              var badgeDrop = document.createElement('span');
+              badgeDrop.className = 'nm-badge drop';
+              badgeDrop.textContent = '降价 $' + (Number(item.was) - Number(item.price));
+              btn.appendChild(badgeDrop);
+            } else if (item._nmFreshNew) {
+              var badgeNew = document.createElement('span');
+              badgeNew.className = 'nm-badge fresh';
+              badgeNew.textContent = '新号';
+              btn.appendChild(badgeNew);
+            } else if (item.hot) {
+              var badgeHot = document.createElement('span');
+              badgeHot.className = 'nm-badge';
+              badgeHot.textContent = '热卖';
+              btn.appendChild(badgeHot);
+            }
+            var numSpan = document.createElement('span');
+            numSpan.className = 'nm-number';
+            numSpan.textContent = formatted;
+            btn.appendChild(numSpan);
+            if (isDrop) {
+              var wasSpan = document.createElement('span');
+              wasSpan.className = 'nm-was';
+              wasSpan.textContent = '原价 $' + item.was;
+              btn.appendChild(wasSpan);
+            }
+            var priceSpan = document.createElement('span');
+            priceSpan.className = 'nm-price';
+            priceSpan.textContent = nmPriceText(item);
+            btn.appendChild(priceSpan);
+            btn.addEventListener('click', function() {
+              if (item.sold) { showNmToast('此号码已售出'); }
+              else { openNmContact(formatted, btn); }
+            });
+            return btn;
+          }
+
+          function renderNmFresh() {
+            var section = document.getElementById('fresh');
+            var grid = document.getElementById('freshGrid');
+            var count = document.getElementById('freshCount');
+            if (!section || !grid) return;
+            if (!NM_FRESH_LIST.length) { section.hidden = true; return; }
+            section.hidden = false;
+            if (count) count.textContent = NM_FRESH_LIST.length + ' 个';
+            grid.textContent = '';
+            NM_FRESH_LIST.forEach(function(item) { grid.appendChild(nmBuildCard(item)); });
+          }
+
           function renderNmGroup(key, data) {
             var grid = document.getElementById(key + 'Grid');
             var count = document.getElementById(key + 'Count');
             var list = Array.isArray(data && data[key]) ? data[key] : [];
+            if (key !== 'search') {
+              list = list.filter(function(item) { return !NM_FRESH_SET[String(item.number)]; });
+            }
             if (count) count.textContent = list.length + ' 个';
             if (!grid) return;
             var nmLayout = null;
@@ -1090,35 +1210,7 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               if (nmCurrent.hasPrev) grid.appendChild(nmNavButton(key, -1, '\u4e0a\u4e00\u9875', NM_GROUP_PAGES[key] - 1, nmPages));
             }
             list.forEach(function(item) {
-              var formatted = formatNmNumber(item.number);
-              var btn = document.createElement('button');
-              btn.className = 'nm-number-card' + (item.sold ? ' is-sold' : '');
-              btn.type = 'button';
-              btn.setAttribute('aria-label', formatted);
-              if (item.sold) {
-                var badgeSold = document.createElement('span');
-                badgeSold.className = 'nm-badge sold';
-                badgeSold.textContent = '已售';
-                btn.appendChild(badgeSold);
-              } else if (item.hot) {
-                var badgeHot = document.createElement('span');
-                badgeHot.className = 'nm-badge';
-                badgeHot.textContent = '热卖';
-                btn.appendChild(badgeHot);
-              }
-              var numSpan = document.createElement('span');
-              numSpan.className = 'nm-number';
-              numSpan.textContent = formatted;
-              btn.appendChild(numSpan);
-              var priceSpan = document.createElement('span');
-              priceSpan.className = 'nm-price';
-              priceSpan.textContent = nmPriceText(item);
-              btn.appendChild(priceSpan);
-              btn.addEventListener('click', function() {
-                if (item.sold) { showNmToast('此号码已售出'); }
-                else { openNmContact(formatted, btn); }
-              });
-              grid.appendChild(btn);
+              grid.appendChild(nmBuildCard(item));
             });
             if (nmLayout) {
               var nmCurrent2 = nmLayout[NM_GROUP_PAGES[key] - 1];
@@ -1148,12 +1240,15 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
             var digits = query.replace(/\D/g, '');
             if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
             var sections = ['triple', 'quad', 'other'];
+            var freshSection = document.getElementById('fresh');
             if (!query) {
               if (results) { results.hidden = true; results.classList.remove('nm-search-results-active'); }
               sections.forEach(function(key) { var el = document.getElementById(key); if (el) el.hidden = false; });
+              if (freshSection) freshSection.hidden = !NM_FRESH_LIST.length;
               return;
             }
             sections.forEach(function(key) { var el = document.getElementById(key); if (el) el.hidden = true; });
+            if (freshSection) freshSection.hidden = true;
             if (results) { results.hidden = false; results.classList.add('nm-search-results-active'); }
             if (!NM_NUMBER_DATA) {
               if (count) count.textContent = '号码加载中…';
@@ -1172,11 +1267,13 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               var number = String(item.number || '').replace(/\D/g, '');
               var group = item._nmGroup;
               var groupText = group === 'triple' ? '三连号 三连' : group === 'quad' ? '四连号 四连' : '精品 好记号 其它';
-              var searchable = [String(item.number || ''), number, groupText, item.sold ? '已售 已售出' : '', item.hot ? '热卖 热门' : '', item.price != null ? String(item.price) : ''].join(' ').toLowerCase();
+              var searchable = [String(item.number || ''), number, groupText, item.sold ? '已售 已售出' : '', item.hot ? '热卖 热门' : '', nmIsDrop(item) ? '降价 特价' : '', item._nmFreshNew ? '新号 新上架' : '', item.price != null ? String(item.price) : ''].join(' ').toLowerCase();
               if (digits && number.indexOf(digits) >= 0) return true;
               if (query.indexOf('三连') >= 0 && group === 'triple') return true;
               if (query.indexOf('四连') >= 0 && group === 'quad') return true;
               if ((query.indexOf('精品') >= 0 || query.indexOf('好记') >= 0) && group === 'other') return true;
+              if ((query.indexOf('降价') >= 0 || query.indexOf('特价') >= 0) && nmIsDrop(item)) return true;
+              if ((query.indexOf('新号') >= 0 || query.indexOf('新上架') >= 0) && item._nmFreshNew) return true;
               if ((query.indexOf('热卖') >= 0 || query.indexOf('热门') >= 0) && item.hot) return true;
               if ((query.indexOf('已售') >= 0 || query.indexOf('售出') >= 0) && item.sold) return true;
               return searchable.indexOf(query) >= 0;
@@ -1202,6 +1299,8 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 var data = await res.json();
                 NM_NUMBER_DATA = data;
+                nmComputeFresh(data);
+                renderNmFresh();
                 renderNmGroup('triple', data);
                 renderNmGroup('quad', data);
                 renderNmGroup('other', data);

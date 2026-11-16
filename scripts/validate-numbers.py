@@ -10,6 +10,9 @@ inventory can never reach the live homepage. Can also be run manually:
 Checks:
 - top level is an object with triple / quad / other lists
 - every item has a 10-digit number and a positive price
+- optional display fields stay well-formed when present: "was" (previous
+  price of a marked-down number) is a positive number, "added" (listing
+  date of a newly added number) is a YYYY-MM-DD string
 - no duplicate numbers across all groups
 - deliberately NO content rules: what belongs in each group is the
   owner's choice. Number patterns (no digit 4, repeated endings, 8888
@@ -61,6 +64,20 @@ def main():
             price = item.get("price")
             if isinstance(price, bool) or not isinstance(price, (int, float)) or price <= 0:
                 errors.append(f"{where}: price missing or not a positive number")
+            was = item.get("was")
+            if was is not None and (
+                isinstance(was, bool) or not isinstance(was, (int, float)) or was <= 0
+            ):
+                errors.append(f"{where}: was must be a positive number when present")
+            added = item.get("added")
+            if added is not None and not (
+                isinstance(added, str)
+                and len(added) == 10
+                and added[4] == "-"
+                and added[7] == "-"
+                and added.replace("-", "").isdigit()
+            ):
+                errors.append(f"{where}: added must be a YYYY-MM-DD date string when present")
 
     for err in errors:
         print("ERROR:", err)
