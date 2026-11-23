@@ -8,31 +8,33 @@ INDEX = ROOT / "index.html"
 
 text = INDEX.read_text(encoding="utf-8")
 
-# 0) Validate numbers.json first; bad inventory must never reach the live site.
+# 0) Validate numbers.json first; problems are warnings only and never
+# block deployment (owner's decision 2026-11-23: keep publish gates loose;
+# inventory is validated before push during the weekly sync).
 _validate = subprocess.run(
     [sys.executable, str(ROOT / "scripts" / "validate-numbers.py")],
     capture_output=True, text=True,
 )
+sys.stdout.write(_validate.stdout)
+sys.stderr.write(_validate.stderr)
 if _validate.returncode != 0:
-    sys.stdout.write(_validate.stdout)
-    sys.stderr.write(_validate.stderr)
-    raise SystemExit("numbers.json validation failed; homepage build aborted")
-print(_validate.stdout.strip())
+    print("WARNING: numbers.json validation reported problems (see above); continuing deployment anyway")
 
 # 1) Add a visible SEO guides entry to the existing sticky category navigation.
 nav_anchor = '              <!-- nm-nav-anchor -->\n'
 nav_guides = '              <a class="nm-cat-chip" href="/guides/">选号指南</a>\n'
 if nav_guides not in text:
     if nav_anchor not in text:
-        raise SystemExit("Could not find NumberMobi navigation marker (nm-nav-anchor)")
-    text = text.replace(nav_anchor, nav_anchor + nav_guides, 1)
+        print("WARNING: navigation marker (nm-nav-anchor) not found; skipping guides nav chip")
+    else:
+        text = text.replace(nav_anchor, nav_anchor + nav_guides, 1)
 
 # 2) Add a compact guide hub on the homepage, at the bottom (after contact, before footer).
 guide_marker = '<article class="template-card nm-guide-home" id="guides">'
 if guide_marker not in text:
     buy_anchor = '        <footer class="nm-footer">\n'
     if buy_anchor not in text:
-        raise SystemExit("Could not find footer insertion point")
+        print("WARNING: footer insertion point not found; skipping homepage guide hub")
     guide_block = '''        <article class="template-card nm-guide-home" id="guides">
           <h2>选号指南</h2>
           <p>第一次买美国手机靓号？这里整理了价格、纽约区号、三连号/四连号、转入套餐和购买注意事项。</p>
@@ -55,7 +57,8 @@ if guide_marker not in text:
         </article>
 
 '''
-    text = text.replace(buy_anchor, guide_block + buy_anchor, 1)
+    if buy_anchor in text:
+        text = text.replace(buy_anchor, guide_block + buy_anchor, 1)
 
 # 3) Replace the old homepage purchase list with a clear inventory/contact notice.
 inventory_block = '''        <article class="template-card" id="buy-note">
@@ -65,7 +68,7 @@ inventory_block = '''        <article class="template-card" id="buy-note">
           <div class="notice-box"><strong>想了解更多号码？</strong><p>网页仅展示部分号码；如需其他地区、区号或特定尾号，欢迎通过电话或微信联系确认。</p><p style="margin-top:8px">付款前请确认号码、最终价格及转网要求。</p></div>
           <p style="margin-top:12px"><a href="/purchase-guide/" style="color:#2563eb;font-weight:800">查看完整购买说明及购买须知 →</a></p>
         </article>'''
-text, count = re.subn(
+new_text, count = re.subn(
     r'        <article class="template-card" id="buy-note">.*?        </article>',
     inventory_block,
     text,
@@ -73,7 +76,9 @@ text, count = re.subn(
     flags=re.S,
 )
 if count != 1:
-    raise SystemExit("Could not replace homepage inventory/purchase note")
+    print("WARNING: homepage inventory/purchase note not matched exactly once; leaving it unchanged")
+else:
+    text = new_text
 
 # 4) Show concise, important purchase terms in the existing number-click modal.
 modal_anchor = '''              '<p class="nm-contact-desc">查询号码是否仍在售及购买事宜。</p>' +
@@ -91,8 +96,9 @@ modal_notice = '''              '<p class="nm-contact-desc">查询号码是否�
               '<div class="nm-contact-number-label">您选择的手机号</div>' +'''
 if 'id="nmPurchaseNotice"' not in text:
     if modal_anchor not in text:
-        raise SystemExit("Could not find number-click modal insertion point")
-    text = text.replace(modal_anchor, modal_notice, 1)
+        print("WARNING: number-click modal insertion point not found; skipping purchase notice")
+    else:
+        text = text.replace(modal_anchor, modal_notice, 1)
 
 # 5) Keep the longer modal readable on mobile and retain existing copy/contact actions.
 modal_css = '''
@@ -109,8 +115,9 @@ modal_css = '''
 '''
 if 'id="nm-purchase-notice-styles"' not in text:
     if '</head>' not in text:
-        raise SystemExit("Could not find document head close")
-    text = text.replace('</head>', modal_css + '\n</head>', 1)
+        print("WARNING: document head close not found; skipping purchase notice styles")
+    else:
+        text = text.replace('</head>', modal_css + '\n</head>', 1)
 
 # Important: do not rewrite number grids during deployment.
 # Existing numbers.json + frontend JavaScript rendering is the stable source of truth.

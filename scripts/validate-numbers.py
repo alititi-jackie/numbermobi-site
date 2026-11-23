@@ -2,8 +2,9 @@
 """Validate numbers.json before publish.
 
 Runs automatically at the start of scripts/build-homepage.py (which GitHub
-Actions executes on every deploy); a failure aborts the build so bad
-inventory can never reach the live homepage. Can also be run manually:
+Actions executes on every deploy); problems are reported as warnings and
+never block deployment (owner's decision 2026-11-23). Can also be run
+manually; the exit code still signals whether problems were found:
 
     python3 scripts/validate-numbers.py
 
