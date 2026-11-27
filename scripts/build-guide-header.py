@@ -4,14 +4,22 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 GUIDES = ROOT / "guides"
 SCRIPT_TAG = '<script src="/guides/search-ui.js" defer></script>'
-FOOTER_HTML = """<footer class="nm-site-footer" aria-label="NumberMobi 全站页脚">
-  <nav aria-label="NumberMobi 全站导航">
-    <a href="/">NumberMobi 首页</a>
-    <a href="/guides/">选号指南</a>
-    <a href="/purchase-guide/">购买说明</a>
-    <a href="https://openaa.com/" target="_blank" rel="noopener noreferrer">OpenAA</a>
+FOOTER_HTML = """<footer class="nm-footer">
+  <nav class="uft-row" aria-label="页脚导航">
+    <a href="/about/">关于本站</a>
+    <a href="/privacy/">隐私政策</a>
+    <a href="https://go.openaa.com/feedback/?site=numbermobi" target="_blank" rel="noopener">联系与反馈</a>
+    <button type="button" class="uft-install" data-install hidden>添加到桌面</button>
   </nav>
-  <p>© 2026 NumberMobi · 美国手机靓号</p>
+  <nav class="uft-row" aria-label="OpenAA 生态">
+    <a href="https://openaa.com/" target="_blank" rel="noopener">OpenAA · 主站</a>
+    <a href="https://dmv.openaa.com/" target="_blank" rel="noopener">DMV题库</a>
+    <a href="https://tools.openaa.com/" target="_blank" rel="noopener">Tools工具</a>
+    <a href="https://en.openaa.com/" target="_blank" rel="noopener">EN英语</a>
+    <a href="https://go.openaa.com/" target="_blank" rel="noopener">Go导航</a>
+    <span class="uft-self" aria-current="true">NumberMobi · 手机靓号</span>
+  </nav>
+  <p class="uft-copy">© 2026 OpenAA · NumberMobi · 美国手机靓号</p>
 </footer>"""
 
 updated_scripts = 0
