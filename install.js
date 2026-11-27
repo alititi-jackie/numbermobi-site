@@ -12,26 +12,30 @@
     window.matchMedia("(display-mode: standalone)").matches ||
     window.navigator.standalone === true;
 
-  var installable = false;
+  /* Always visible (user decision 2026-11-27): the button shows on every
+     browser; a tap either opens the native install prompt or an instruction
+     card. Only hidden when the site is already installed (standalone mode). */
   function reveal() {
-    installable = true;
+    if (standalone) return;
     var btns = document.querySelectorAll("[data-install]");
     for (var i = 0; i < btns.length; i++) btns[i].hidden = false;
   }
   window.nmRevealInstall = reveal;
+  reveal();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", reveal);
+  }
   if (window.MutationObserver) {
-    new MutationObserver(function () {
-      if (installable) reveal();
-    }).observe(document.documentElement, { childList: true, subtree: true });
+    new MutationObserver(reveal).observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
   }
 
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();
     deferredPrompt = e;
-    reveal();
   });
-
-  if (isIOS && !standalone) reveal();
 
   function showHint() {
     if (document.getElementById("nm-install-hint")) return;
