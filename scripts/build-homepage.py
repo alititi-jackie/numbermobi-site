@@ -39,9 +39,11 @@ if guide_marker not in text:
           <h2>选号指南</h2>
           <p>第一次买美国手机靓号？这里整理了价格、纽约区号、三连号/四连号、转入套餐和购买注意事项。</p>
           <div class="mini-grid">
-            <a class="mini-card" href="/guides/buy-us-phone-number/"><strong>美国靓号怎么买？</strong><span>选号、付款、交付与转入流程</span></a>
-            <a class="mini-card" href="/guides/us-phone-number-price/"><strong>美国靓号多少钱？</strong><span>号码费用与手机套餐费用区别</span></a>
+            <a class="mini-card" href="/guides/212-phone-number/"><strong>212区号号码怎么买？</strong><span>曼哈顿专属区号，只能预订或二级市场</span></a>
             <a class="mini-card" href="/guides/new-york-phone-number/"><strong>纽约区号怎么选？</strong><span>917、718、347、646、929 指南</span></a>
+            <a class="mini-card" href="/guides/us-phone-number-price/"><strong>美国靓号多少钱？</strong><span>号码费用与手机套餐费用区别</span></a>
+            <a class="mini-card" href="/guides/transfer-phone-number/"><strong>靓号怎么转到自己的套餐？</strong><span>转号前要确认的状态、资料与兼容性</span></a>
+            <a class="mini-card" href="/guides/buy-us-phone-number/"><strong>美国靓号怎么买？</strong><span>选号、付款、交付与转入流程</span></a>
             <a class="mini-card" href="/guides/triple-quad-number/"><strong>三连号、四连号</strong><span>重复尾号与好记号码怎么选</span></a>
             <a class="mini-card" href="/guides/california-phone-number/"><strong>加州靓号怎么选？</strong><span>洛杉矶、旧金山热门区号指南</span></a>
             <a class="mini-card" href="/guides/texas-phone-number/"><strong>得克萨斯靓号怎么选？</strong><span>休斯敦、达拉斯热门区号指南</span></a>

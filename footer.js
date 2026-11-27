@@ -1,15 +1,6 @@
 (function () {
   'use strict';
 
-  var GUIDE_ROW =
-    '<nav class="uft-row" aria-label="选号指南">' +
-      '<a href="/guides/">选号指南</a>' +
-      '<a href="/guides/212-phone-number/">212 靓号</a>' +
-      '<a href="/guides/new-york-phone-number/">纽约靓号</a>' +
-      '<a href="/guides/us-phone-number-price/">靓号价格说明</a>' +
-      '<a href="/guides/transfer-phone-number/">号码转入指南</a>' +
-    '</nav>';
-
   var FOOTER_HTML =
     '<nav class="uft-row" aria-label="页脚导航">' +
       '<a href="/about/">关于本站</a>' +
@@ -66,7 +57,7 @@
 
     footer.className = 'nm-footer';
     footer.setAttribute('aria-label', 'NumberMobi 全站页脚');
-    footer.innerHTML = (location.pathname === '/' ? GUIDE_ROW : '') + FOOTER_HTML;
+    footer.innerHTML = FOOTER_HTML;
     if (window.nmRevealInstall) window.nmRevealInstall();
     initBackToTop();
 
