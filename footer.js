@@ -1,14 +1,31 @@
 (function () {
   'use strict';
 
-  var FOOTER_HTML =
-    '<nav aria-label="NumberMobi 全站导航">' +
-      '<a href="/">NumberMobi 首页</a>' +
+  var GUIDE_ROW =
+    '<nav class="uft-row" aria-label="选号指南">' +
       '<a href="/guides/">选号指南</a>' +
-      '<a href="/purchase-guide/">购买说明</a>' +
-      '<a href="https://openaa.com/" target="_blank" rel="noopener noreferrer">OpenAA</a>' +
+      '<a href="/guides/212-phone-number/">212 靓号</a>' +
+      '<a href="/guides/new-york-phone-number/">纽约靓号</a>' +
+      '<a href="/guides/us-phone-number-price/">靓号价格说明</a>' +
+      '<a href="/guides/transfer-phone-number/">号码转入指南</a>' +
+    '</nav>';
+
+  var FOOTER_HTML =
+    '<nav class="uft-row" aria-label="页脚导航">' +
+      '<a href="/about/">关于本站</a>' +
+      '<a href="/privacy/">隐私政策</a>' +
+      '<a href="https://go.openaa.com/feedback/?site=numbermobi" target="_blank" rel="noopener">联系与反馈</a>' +
+      '<button type="button" class="uft-install" data-install hidden>添加到桌面</button>' +
     '</nav>' +
-    '<p>© 2026 NumberMobi · 美国手机靓号</p>';
+    '<nav class="uft-row" aria-label="OpenAA 生态">' +
+      '<a href="https://openaa.com/" target="_blank" rel="noopener">OpenAA · 主站</a>' +
+      '<a href="https://dmv.openaa.com/" target="_blank" rel="noopener">DMV题库</a>' +
+      '<a href="https://tools.openaa.com/" target="_blank" rel="noopener">Tools工具</a>' +
+      '<a href="https://en.openaa.com/" target="_blank" rel="noopener">EN英语</a>' +
+      '<a href="https://go.openaa.com/" target="_blank" rel="noopener">Go导航</a>' +
+      '<span class="uft-self" aria-current="true">NumberMobi · 手机靓号</span>' +
+    '</nav>' +
+    '<p class="uft-copy">© 2026 OpenAA · NumberMobi · 美国手机靓号</p>';
 
   function initBackToTop() {
     var button = document.querySelector('.nm-back-to-top');
@@ -47,28 +64,22 @@
       host.appendChild(footer);
     }
 
-    footer.className = 'nm-site-footer';
+    footer.className = 'nm-footer';
     footer.setAttribute('aria-label', 'NumberMobi 全站页脚');
-    footer.innerHTML = FOOTER_HTML;
+    footer.innerHTML = (location.pathname === '/' ? GUIDE_ROW : '') + FOOTER_HTML;
+    if (window.nmRevealInstall) window.nmRevealInstall();
     initBackToTop();
 
     if (!document.getElementById('nm-site-footer-styles')) {
       var style = document.createElement('style');
       style.id = 'nm-site-footer-styles';
       style.textContent =
-        '.nm-site-footer{margin:28px auto 0;padding:18px 16px 16px;border-top:1px solid #dbe3ee;background:#fff;color:#64748b;text-align:center;font-size:13px;line-height:1.6}' +
-        '.nm-site-footer nav{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,24px);flex-wrap:wrap;margin:0 0 10px}' +
-        '.nm-site-footer nav a{color:#475569;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap}' +
-        '.nm-site-footer nav a:hover,.nm-site-footer nav a:focus-visible{color:#2563eb}' +
-        '.nm-site-footer p{margin:0;color:#64748b;font-size:12px}' +
-        '@media(max-width:380px){.nm-site-footer{padding:16px 10px}.nm-site-footer nav{column-gap:12px;row-gap:8px}.nm-site-footer nav a{font-size:13px}}' +
         '.nm-back-to-top{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(88px + env(safe-area-inset-bottom));z-index:9999;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid #e2e8f0;border-radius:50%;background:#fffffff2;color:#334155;box-shadow:0 8px 18px #0f172a1a;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;pointer-events:auto;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility .2s ease}' +
         '.nm-back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0)}' +
         '.nm-back-to-top:hover{background:#f8fafc;color:#2563eb}' +
         '.nm-back-to-top:focus-visible{outline:3px solid #2563eb;outline-offset:3px}' +
         '@media(min-width:768px){.nm-back-to-top{right:max(24px,calc((100vw - 1100px)/2 + 24px));bottom:24px}}' +
-        '@media(prefers-reduced-motion:reduce){.nm-back-to-top{transition:none}}' +
-        '@media print{.nm-back-to-top{display:none!important}}';
+        '@media(prefers-reduced-motion:reduce){.nm-back-to-top{transition:none}}';
       document.head.appendChild(style);
     }
   }

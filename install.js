@@ -12,9 +12,17 @@
     window.matchMedia("(display-mode: standalone)").matches ||
     window.navigator.standalone === true;
 
+  var installable = false;
   function reveal() {
+    installable = true;
     var btns = document.querySelectorAll("[data-install]");
     for (var i = 0; i < btns.length; i++) btns[i].hidden = false;
+  }
+  window.nmRevealInstall = reveal;
+  if (window.MutationObserver) {
+    new MutationObserver(function () {
+      if (installable) reveal();
+    }).observe(document.documentElement, { childList: true, subtree: true });
   }
 
   window.addEventListener("beforeinstallprompt", function (e) {
