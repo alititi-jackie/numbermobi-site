@@ -561,6 +561,22 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
 @media(max-width:360px){.nm-contact-overlay{padding:14px}.nm-contact-dialog{padding:26px 16px 18px}.nm-contact-actions{gap:7px}.nm-contact-actions button{font-size:12px;padding-left:4px;padding-right:4px}}
 </style>
 
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2563eb">
+<link rel="stylesheet" href="/footer.css">
+<script src="/install.js" defer></script>
+
+<style id="nm-purchase-notice-styles">
+.nm-contact-dialog{max-height:calc(100vh - 28px);overflow-y:auto;text-align:left;overscroll-behavior:contain}
+.nm-contact-mark,.nm-contact-dialog h2,.nm-contact-intro,.nm-contact-desc,.nm-contact-number-label,.nm-contact-number,.nm-contact-actions,.nm-copy-status,.nm-contact-tip{text-align:center}
+.nm-purchase-notice{margin:0 0 14px;padding:12px;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#334155;font-size:12px;line-height:1.55}
+.nm-purchase-notice h3{margin:0 0 8px;color:#111827;font-size:15px;font-weight:800}
+.nm-purchase-notice p{margin:0 0 7px}
+.nm-purchase-notice p:last-of-type{margin-bottom:8px}
+.nm-purchase-notice a{color:#2563eb;font-weight:800;text-decoration:none}
+@media(max-width:600px){.nm-contact-overlay{align-items:center;padding:12px}.nm-contact-dialog{max-width:440px;max-height:calc(100dvh - 24px);padding:24px 16px 16px}.nm-purchase-notice{font-size:12px;padding:10px}}
+</style>
+
 </head>
 <body class="numbermobi-site">
   <div class="app-shell"><header class="site-header"><div class="header-inner"><a class="brand" href="/" aria-label="NumberMobi 首页"><img class="brand-logo" src="/logo.png" alt="" width="32" height="32"><span class="brand-name"><span class="brand-number" style="color:#2563eb!important">Number</span><span class="brand-mobi" style="color:#0f172a!important">Mobi</span></span></a><div class="header-actions"><a class="share-button go-button" href="https://go.openaa.com/" aria-label="打开 OpenAA Go 导航" title="OpenAA Go 导航"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg></a><button class="share-button" type="button" data-share aria-label="分享当前页面" title="分享当前页面"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.7 10.7 6.6-4.4"></path><path d="m8.7 13.3 6.6 4.4"></path></svg></button></div></div></header><main>
@@ -742,15 +758,11 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
         </section>
 
         <article class="template-card" id="buy-note">
-          <h2>购买说明</h2>
-          <ul class="nm-note-list">
-            <li>页面仅展示部分号码样例。若有具体偏好（生日号、连号、特殊区号等），请通过电话、微信或邮箱联系我们获取实时库存</li>
-            <li>页面显示的号码，最终是否可用请以联系确认为准。</li>
-            <li>已售号码会标注“已售”，如果喜欢类似尾号，可以联系咨询相近号码。</li>
-            <li>支持微信、Zelle 等常见付款方式，付款前请先确认号码、价格和转入流程。</li>
-            <li>号码购买后请尽量在 20 天内转出。超过 20 天未转出将按每月 $4 收取托管费用。</li>
-            <li>适合个人长期号码、店铺电话、微信绑定、生意联系和容易记忆的公开联系方式。</li>
-          </ul>
+          <h2>美国各州更多号码，欢迎咨询</h2>
+          <p><strong>网站仅展示部分号码，并非全部库存。</strong>目前美国多个州还有更多号码资源，但部分号码尚未整理上架，网页显示的号码、库存状态及价格可能未及时更新，实际可售情况请以联系确认为准。</p>
+          <p>如需指定州、区号、生日号、连号、特殊数字组合或容易记忆的尾号，欢迎直接添加微信或致电查询。网页上没有找到心仪号码，也欢迎咨询，我们会根据您的需求协助查询更多库存及相近选择。</p>
+          <div class="notice-box"><strong>想了解更多号码？</strong><p>网页仅展示部分号码；如需其他地区、区号或特定尾号，欢迎通过电话或微信联系确认。</p><p style="margin-top:8px">付款前请确认号码、最终价格及转网要求。</p></div>
+          <p style="margin-top:12px"><a href="/purchase-guide/" style="color:#2563eb;font-weight:800">查看完整购买说明及购买须知 →</a></p>
         </article>
 
         <article class="template-card" id="contact">
@@ -762,20 +774,51 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
           </div>
         </article>
 
+        <article class="template-card nm-guide-home" id="guides">
+          <h2>选号指南</h2>
+          <p>第一次买美国手机靓号？这里整理了价格、纽约区号、三连号/四连号、转入套餐和购买注意事项。</p>
+          <div class="mini-grid">
+            <a class="mini-card" href="/guides/buy-us-phone-number/"><strong>美国靓号怎么买？</strong><span>选号、付款、交付与转入流程</span></a>
+            <a class="mini-card" href="/guides/us-phone-number-price/"><strong>美国靓号多少钱？</strong><span>号码费用与手机套餐费用区别</span></a>
+            <a class="mini-card" href="/guides/new-york-phone-number/"><strong>纽约区号怎么选？</strong><span>917、718、347、646、929 指南</span></a>
+            <a class="mini-card" href="/guides/triple-quad-number/"><strong>三连号、四连号</strong><span>重复尾号与好记号码怎么选</span></a>
+            <a class="mini-card" href="/guides/california-phone-number/"><strong>加州靓号怎么选？</strong><span>洛杉矶、旧金山热门区号指南</span></a>
+            <a class="mini-card" href="/guides/texas-phone-number/"><strong>得克萨斯靓号怎么选？</strong><span>休斯敦、达拉斯热门区号指南</span></a>
+            <a class="mini-card" href="/guides/florida-phone-number/"><strong>佛罗里达靓号怎么选？</strong><span>迈阿密、奥兰多热门区号指南</span></a>
+            <a class="mini-card" href="/guides/washington-phone-number/"><strong>华盛顿州靓号怎么选？</strong><span>西雅图、斯波坎热门区号指南</span></a>
+            <a class="mini-card" href="/guides/new-jersey-phone-number/"><strong>新泽西靓号怎么选？</strong><span>纽瓦克、泽西城热门区号指南</span></a>
+            <a class="mini-card" href="/guides/massachusetts-phone-number/"><strong>麻萨诸塞州靓号怎么选？</strong><span>波士顿热门区号指南</span></a>
+            <a class="mini-card" href="/guides/illinois-phone-number/"><strong>伊利诺伊靓号怎么选？</strong><span>芝加哥热门区号指南</span></a>
+            <a class="mini-card" href="/guides/hawaii-phone-number/"><strong>夏威夷靓号怎么选？</strong><span>檀香山 808 区号指南</span></a>
+            <a class="mini-card" href="/guides/georgia-phone-number/"><strong>佐治亚靓号怎么选？</strong><span>亚特兰大、萨凡纳热门区号指南</span></a>
+          </div>
+          <p style="margin-top:12px"><a href="/guides/" style="color:#2563eb;font-weight:800">查看全部选号指南 →</a></p>
+        </article>
+
         <footer class="nm-footer">
-          <nav aria-label="选号指南">
-            <a href="/guides/">选号指南</a>
-            <a href="/guides/212-phone-number/">212 靓号</a>
-            <a href="/guides/new-york-phone-number/">纽约靓号</a>
-            <a href="/guides/us-phone-number-price/">靓号价格说明</a>
-            <a href="/guides/transfer-phone-number/">号码转入指南</a>
-          </nav>
-          <nav aria-label="OpenAA 生态">
-            <a href="https://openaa.com/" target="_blank" rel="noopener">OpenAA</a>
-            <a href="https://go.openaa.com/" target="_blank" rel="noopener">Go 导航</a>
-          </nav>
-          <p>© 2026 NumberMobi · 美国手机靓号</p>
-        </footer>
+  <nav class="uft-row" aria-label="选号指南">
+    <a href="/guides/">选号指南</a>
+    <a href="/guides/212-phone-number/">212 靓号</a>
+    <a href="/guides/new-york-phone-number/">纽约靓号</a>
+    <a href="/guides/us-phone-number-price/">靓号价格说明</a>
+    <a href="/guides/transfer-phone-number/">号码转入指南</a>
+  </nav>
+  <nav class="uft-row" aria-label="页脚导航">
+    <a href="/about/">关于本站</a>
+    <a href="/privacy/">隐私政策</a>
+    <a href="https://go.openaa.com/feedback/?site=numbermobi" target="_blank" rel="noopener">联系与反馈</a>
+    <button type="button" class="uft-install" data-install hidden>添加到桌面</button>
+  </nav>
+  <nav class="uft-row" aria-label="OpenAA 生态">
+    <a href="https://openaa.com/" target="_blank" rel="noopener">OpenAA · 主站</a>
+    <a href="https://dmv.openaa.com/" target="_blank" rel="noopener">DMV题库</a>
+    <a href="https://tools.openaa.com/" target="_blank" rel="noopener">Tools工具</a>
+    <a href="https://en.openaa.com/" target="_blank" rel="noopener">EN英语</a>
+    <a href="https://go.openaa.com/" target="_blank" rel="noopener">Go导航</a>
+    <span class="uft-self" aria-current="true">NumberMobi · 手机靓号</span>
+  </nav>
+  <p class="uft-copy">© 2026 OpenAA · NumberMobi · 美国手机靓号</p>
+</footer>
 
         <script>
           var NM_NUMBER_FILE_CANDIDATES = ['/numbers.json'];
@@ -922,6 +965,15 @@ html,body{background:#fff!important}body{max-width:1040px;margin:0 auto;padding-
               '<h2 id="nmContactTitle">查询号码在售情况</h2>' +
               '<p class="nm-contact-intro">请添加微信：<strong>hola24</strong></p>' +
               '<p class="nm-contact-desc">查询号码是否仍在售及购买事宜。</p>' +
+              '<div class="nm-purchase-notice" id="nmPurchaseNotice">' +
+                '<h3>购买须知</h3>' +
+                '<p><strong>号码与套餐：</strong>本站仅出售号码，不包含手机套餐。购买成功后提供转网所需账号及密码，需自行办理转网。</p>' +
+                '<p><strong>付款方式：</strong>支持微信、Zelle 等常见付款方式。</p>' +
+                '<p><strong>转网与退换：</strong>本站号码均为虚拟网络运营商号码，不保证所有号码均可转入指定运营商。号码售出后，概不退换。若指定运营商无法接收，建议更换为支持转入的运营商；具体规则以适用法律为准。</p>' +
+                '<p><strong>转出期限：</strong>请尽量在购买后 20 天内完成转出。</p>' +
+                '<p><strong>逾期托管：</strong>超过 20 天仍未转出的号码，按每月 $4 收取托管费用。具体计费规则请在购买前确认。</p>' +
+                '<a href="/purchase-guide/" target="_blank" rel="noopener">查看完整购买说明 →</a>' +
+              '</div>' +
               '<div class="nm-contact-number-label">您选择的手机号</div>' +
               '<div class="nm-contact-number" id="nmContactNumber"></div>' +
               '<div class="nm-contact-actions">' +

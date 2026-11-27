@@ -1,0 +1,50 @@
+/* Unified OpenAA family footer (same spec as en.openaa.com / tools.openaa.com):
+   14px, line-height 1.75, item gap 6px 20px, rows centered, copy line 12px. */
+.nm-footer {
+  margin-top: 28px;
+  padding: 24px 16px;
+  border-top: 1px solid #dbe3ee;
+  background: #fff;
+  color: #64748b;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.75;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    "Segoe UI", sans-serif;
+}
+.uft-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 12px;
+  padding: 0;
+}
+.uft-row a {
+  color: #475569;
+  text-decoration: none;
+}
+.uft-row a:hover {
+  color: #1d4ed8;
+}
+.uft-install {
+  font: inherit;
+  color: #475569;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.uft-install:hover {
+  color: #1d4ed8;
+}
+.uft-self {
+  color: #0f172a;
+  font-weight: 600;
+}
+.uft-copy {
+  font-size: 12px;
+  margin: 0;
+}
